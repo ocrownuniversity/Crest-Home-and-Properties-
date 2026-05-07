@@ -325,6 +325,33 @@ footer{background:var(--black);color:var(--white);padding:80px 5% 40px;}
 .img-overlay img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;}
 .img-overlay-close{position:absolute;top:24px;right:24px;background:rgba(255,255,255,0.1);border:none;color:var(--white);width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;}
 
+/* ====== PROMO BANNER ====== */
+.promo-banner{background:linear-gradient(90deg,var(--navy-mid),var(--navy));border-bottom:1px solid rgba(201,168,76,0.2);padding:12px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.promo-banner-text{color:var(--white);font-size:0.88rem;display:flex;align-items:center;gap:10px;}
+.promo-banner-text span{background:var(--gold);color:var(--navy);font-size:0.72rem;font-weight:700;letter-spacing:1px;padding:3px 8px;border-radius:4px;text-transform:uppercase;}
+.promo-banner-close{background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.1rem;cursor:pointer;flex-shrink:0;transition:var(--transition);}
+.promo-banner-close:hover{color:var(--white);}
+
+/* ====== RECENTLY VIEWED ====== */
+.recently-viewed{padding:24px 5%;background:var(--off-white);border-bottom:1px solid var(--gray-light);}
+.recently-viewed-inner{display:none;}
+.recently-viewed-inner.has-items{display:block;}
+.recently-viewed h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.recently-viewed h4::before{content:'👁';font-size:0.9rem;}
+.rv-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
+.rv-scroll::-webkit-scrollbar{display:none;}
+.rv-card{flex:0 0 160px;background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--gray-light);cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-sm);}
+.rv-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.rv-card-img{height:90px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
+.rv-card-info{padding:8px 10px;}
+.rv-card-title{font-size:0.78rem;font-weight:600;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rv-card-price{font-size:0.73rem;color:var(--gold);margin-top:2px;}
+
+/* ====== INSTALL APP ====== */
+#install-app-btn{display:none;align-items:center;gap:6px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);color:var(--gold);font-size:0.8rem;font-weight:500;padding:7px 14px;border-radius:7px;cursor:pointer;transition:var(--transition);white-space:nowrap;}
+#install-app-btn:hover{background:var(--gold);color:var(--navy);}
+#install-app-btn.visible{display:flex;}
+
 /* Responsive */
 @media(max-width:1024px){
   .footer-grid{grid-template-columns:1fr 1fr;}
@@ -393,6 +420,10 @@ footer{background:var(--black);color:var(--white);padding:80px 5% 40px;}
       <a href="#" onclick="navigate('contact')" id="nav-contact">Contact</a>
       <a href="#" onclick="navigate('admin-login')" id="nav-admin" class="nav-cta">Admin</a>
     </div>
+    <button id="install-app-btn" onclick="installApp()" title="Install App">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5v-2z"/></svg>
+      Install App
+    </button>
     <button class="hamburger" onclick="openMobileMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -428,6 +459,23 @@ footer{background:var(--black);color:var(--white);padding:80px 5% 40px;}
     </div>
     <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
   </section>
+
+  <!-- Promo Banner -->
+  <div class="promo-banner" id="promo-banner">
+    <div class="promo-banner-text">
+      <span>New</span>
+      🏡 Explore our latest premium listings in Benin City — limited plots available. <a href="#" onclick="navigate('properties')" style="color:var(--gold-light);text-decoration:underline;margin-left:4px;">View Properties →</a>
+    </div>
+    <button class="promo-banner-close" onclick="document.getElementById('promo-banner').style.display='none'" title="Dismiss">✕</button>
+  </div>
+
+  <!-- Recently Viewed -->
+  <div class="recently-viewed">
+    <div class="recently-viewed-inner" id="rv-inner">
+      <h4>Recently Viewed</h4>
+      <div class="rv-scroll" id="rv-scroll"></div>
+    </div>
+  </div>
 
   <!-- Featured Properties -->
   <section class="section" id="section-featured">
@@ -1360,6 +1408,9 @@ window.openPropertyDetail = async function(id, fromAdmin=false) {
       </div>
     </div>`;
 
+  // Track recently viewed
+  trackRecentlyViewed(p);
+
   navigate('detail');
   window.scrollTo(0,0);
 };
@@ -1635,6 +1686,72 @@ window.sendContactForm = async function() {
     ['cf-fname','cf-lname','cf-email','cf-phone','cf-subject','cf-message'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
   } catch(e) { showToast('Error: '+e.message,'error'); }
 };
+// ===== RECENTLY VIEWED =====
+function trackRecentlyViewed(p) {
+  try {
+    let rv = JSON.parse(sessionStorage.getItem('rv') || '[]');
+    rv = rv.filter(x => x.id !== p.id);
+    rv.unshift({ id: p.id, title: p.title, price: p.price, media: p.media });
+    if (rv.length > 6) rv = rv.slice(0, 6);
+    sessionStorage.setItem('rv', JSON.stringify(rv));
+    renderRecentlyViewed(rv);
+  } catch(e) {}
+}
+
+function renderRecentlyViewed(rv) {
+  const inner = document.getElementById('rv-inner');
+  const scroll = document.getElementById('rv-scroll');
+  if (!inner || !scroll) return;
+  if (!rv || rv.length === 0) { inner.classList.remove('has-items'); return; }
+  inner.classList.add('has-items');
+  scroll.innerHTML = rv.map(item => {
+    const img = item.media && item.media[0];
+    const imgContent = img && img.type !== 'video'
+      ? `<img src="${img.url}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<span>🏠</span>`;
+    return `<div class="rv-card" onclick="openPropertyDetail('${item.id}')">
+      <div class="rv-card-img">${imgContent}</div>
+      <div class="rv-card-info">
+        <div class="rv-card-title">${item.title}</div>
+        <div class="rv-card-price">₦${formatPrice(item.price)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Restore recently viewed on page load
+try {
+  const rv = JSON.parse(sessionStorage.getItem('rv') || '[]');
+  if (rv.length) renderRecentlyViewed(rv);
+} catch(e) {}
+
+// ===== INSTALL APP (PWA) =====
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const btn = document.getElementById('install-app-btn');
+  if (btn) btn.classList.add('visible');
+});
+
+window.installApp = async function() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  if (outcome === 'accepted') {
+    const btn = document.getElementById('install-app-btn');
+    if (btn) btn.classList.remove('visible');
+    deferredInstallPrompt = null;
+  }
+};
+
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('install-app-btn');
+  if (btn) btn.classList.remove('visible');
+  deferredInstallPrompt = null;
+});
+
 </script>
 </body>
 </html>
