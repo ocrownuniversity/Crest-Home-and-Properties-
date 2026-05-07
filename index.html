@@ -3,1755 +3,1142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crest Homes & Properties Ltd | Premium Real Estate</title>
+<title>Crest Homes & Properties Ltd | Premium Real Estate — Benin City</title>
+<meta name="description" content="Crest Homes & Properties Ltd — Your trusted partner for premium real estate in Benin City and globally.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy: #0a1628;
-  --navy-light: #122040;
-  --navy-mid: #1a3060;
-  --gold: #c9a84c;
-  --gold-light: #e2c97e;
-  --gold-pale: #f5edd6;
-  --white: #ffffff;
-  --off-white: #f8f6f0;
-  --gray: #8a9ab5;
-  --gray-light: #e8ecf3;
-  --black: #050d1a;
-  --success: #2ecc71;
-  --danger: #e74c3c;
-  --shadow: 0 8px 40px rgba(10,22,40,0.18);
-  --shadow-sm: 0 2px 12px rgba(10,22,40,0.10);
-  --radius: 12px;
-  --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+:root{
+  --navy:#0b1f3a;--navy2:#112848;--navy3:#1a3a5c;
+  --gold:#c8973f;--gold2:#e4b86a;--gold3:#f5e4c0;
+  --white:#fff;--off:#f7f5f0;--light:#eef1f6;
+  --gray:#7a8fa6;--gray2:#b0bece;--border:#dde3ec;
+  --black:#060f1c;--green:#16a34a;--red:#dc2626;
+  --sh1:0 4px 24px rgba(11,31,58,.10);--sh2:0 12px 48px rgba(11,31,58,.18);--sh3:0 2px 8px rgba(11,31,58,.07);
+  --r:14px;--r2:8px;--ease:all .3s cubic-bezier(.4,0,.2,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--navy);overflow-x:hidden;}
-h1,h2,h3,h4,h5{font-family:'Cormorant Garamond',serif;}
+body{font-family:'Inter',sans-serif;background:var(--off);color:var(--navy);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.2;}
 a{text-decoration:none;color:inherit;}
-img{max-width:100%;}
-button{cursor:pointer;font-family:'DM Sans',sans-serif;}
+img{max-width:100%;display:block;}
+button{cursor:pointer;font-family:'Inter',sans-serif;border:none;background:none;}
+input,textarea,select{font-family:'Inter',sans-serif;}
 
-/* ====== LOADER ====== */
-#loader{position:fixed;inset:0;background:var(--navy);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
-.loader-logo{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);letter-spacing:3px;}
-.loader-bar{width:200px;height:3px;background:rgba(201,168,76,0.2);border-radius:2px;overflow:hidden;}
-.loader-fill{height:100%;background:var(--gold);border-radius:2px;animation:fill 1.5s ease forwards;}
-@keyframes fill{from{width:0}to{width:100%}}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--navy);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s;}
+#loader.hide{opacity:0;pointer-events:none;}
+.ld-icon{width:64px;height:64px;background:var(--gold);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2rem;color:var(--navy);font-weight:700;margin-bottom:4px;}
+.ld-name{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--white);letter-spacing:1px;}
+.ld-tag{font-size:.7rem;color:var(--gold2);letter-spacing:3px;text-transform:uppercase;}
+.ld-bar{width:180px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;margin-top:6px;}
+.ld-fill{height:100%;background:var(--gold);border-radius:2px;animation:ldfill 1.8s ease forwards;}
+@keyframes ldfill{from{width:0}to{width:100%}}
 
-/* ====== NAVBAR ====== */
-#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;transition:var(--transition);background:transparent;}
-#navbar.scrolled{background:rgba(10,22,40,0.97);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(0,0,0,0.3);}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:80px;}
-.nav-logo{display:flex;align-items:center;gap:12px;}
-.nav-logo-icon{width:44px;height:44px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--navy);font-weight:700;}
-.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--white);line-height:1.2;}
-.nav-logo-text span{display:block;font-size:0.7rem;color:var(--gold);letter-spacing:2px;font-family:'DM Sans',sans-serif;font-weight:300;}
-.nav-links{display:flex;align-items:center;gap:8px;}
-.nav-links a{color:rgba(255,255,255,0.85);font-size:0.9rem;font-weight:400;padding:8px 16px;border-radius:6px;transition:var(--transition);}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,168,76,0.1);}
-.nav-cta{background:var(--gold);color:var(--navy)!important;font-weight:600!important;border-radius:8px!important;}
-.nav-cta:hover{background:var(--gold-light)!important;color:var(--navy)!important;}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:8px;}
-.hamburger span{display:block;width:26px;height:2px;background:var(--white);border-radius:2px;transition:var(--transition);}
-.mobile-menu{display:none;position:fixed;inset:0;background:var(--navy);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:24px;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--white);font-size:1.8rem;font-family:'Cormorant Garamond',serif;transition:var(--transition);}
-.mobile-menu a:hover{color:var(--gold);}
-.mobile-close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--white);font-size:2rem;cursor:pointer;}
-
-/* ====== PAGES ====== */
-.page{display:none;min-height:100vh;}
+/* PAGES */
+.page{display:none;}
 .page.active{display:block;}
 
-/* ====== HERO ====== */
-#hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,var(--navy-light) 100%);}
-.hero-bg::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="g" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.5" fill="rgba(201,168,76,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23g)"/></svg>') repeat;opacity:0.8;}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,22,40,0.9) 40%,rgba(10,22,40,0.3));}
-.hero-img{position:absolute;right:0;top:0;bottom:0;width:55%;object-fit:cover;opacity:0.25;}
-.hero-content{position:relative;z-index:2;padding:0 5%;max-width:700px;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border-radius:50px;margin-bottom:24px;}
-.hero-badge::before{content:'';width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
-.hero-title{font-size:clamp(2.8rem,6vw,5rem);color:var(--white);line-height:1.1;margin-bottom:20px;font-weight:600;}
-.hero-title span{color:var(--gold);}
-.hero-sub{font-size:1.1rem;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:40px;max-width:520px;}
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
-.btn-gold{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-weight:600;font-size:0.95rem;padding:14px 28px;border-radius:10px;border:none;transition:var(--transition);letter-spacing:0.3px;}
-.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.35);}
-.btn-outline{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--white);font-weight:500;font-size:0.95rem;padding:14px 28px;border-radius:10px;border:1px solid rgba(255,255,255,0.3);transition:var(--transition);}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.05);}
-.hero-stats{display:flex;gap:48px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.1);}
-.stat-item{color:var(--white);}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--gold);font-weight:600;display:block;line-height:1;}
-.stat-label{font-size:0.8rem;color:rgba(255,255,255,0.55);letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
-.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 2s infinite;}
-@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* NAVBAR */
+#navbar{position:fixed;inset:0 0 auto 0;z-index:500;background:rgba(11,31,58,.96);backdrop-filter:blur(16px);transition:var(--ease);}
+#navbar.scrolled{box-shadow:0 1px 0 rgba(255,255,255,.06);}
+.nav-wrap{max-width:1280px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:12px;cursor:pointer;flex-shrink:0;}
+.nav-logo-box{width:40px;height:40px;background:var(--gold);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--navy);font-weight:700;flex-shrink:0;}
+.nav-logo-text strong{display:block;font-family:'Playfair Display',serif;font-size:1rem;color:var(--white);font-weight:600;line-height:1.1;}
+.nav-logo-text span{display:block;font-size:.58rem;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;margin-top:1px;}
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links a{color:rgba(255,255,255,.8);font-size:.88rem;padding:8px 14px;border-radius:8px;transition:var(--ease);}
+.nav-links a:hover,.nav-links a.act{color:var(--gold2);background:rgba(200,151,63,.1);}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;font-weight:600!important;border-radius:8px!important;}
+.nav-cta:hover{background:var(--gold2)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:6px;flex-shrink:0;}
+.hamburger i{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;}
+.mob-nav{display:none;position:fixed;inset:0;background:var(--navy);z-index:600;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mob-nav.open{display:flex;}
+.mob-nav a{font-family:'Playfair Display',serif;font-size:2rem;color:rgba(255,255,255,.85);transition:var(--ease);}
+.mob-nav a:hover{color:var(--gold);}
+.mob-close{position:absolute;top:20px;right:20px;color:var(--white);font-size:1.8rem;padding:8px;line-height:1;}
 
-/* ====== SECTIONS ====== */
-.section{padding:100px 5%;}
-.section-alt{background:var(--white);}
-.section-header{text-align:center;margin-bottom:64px;}
-.section-tag{display:inline-block;color:var(--gold);font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;font-weight:500;margin-bottom:12px;}
-.section-title{font-size:clamp(2rem,4vw,3rem);color:var(--navy);line-height:1.2;margin-bottom:16px;}
-.section-sub{color:var(--gray);font-size:1rem;max-width:560px;margin:0 auto;line-height:1.7;}
-.divider{width:60px;height:3px;background:var(--gold);margin:20px auto 0;border-radius:2px;}
+/* TOAST */
+#toasts{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+.toast{background:var(--navy);color:var(--white);padding:13px 18px;border-radius:10px;font-size:.88rem;display:flex;align-items:center;gap:10px;box-shadow:var(--sh2);animation:tsin .3s ease,tsout .3s ease 2.8s forwards;pointer-events:all;}
+.toast.ok{border-left:3px solid var(--green);}
+.toast.err{border-left:3px solid var(--red);}
+@keyframes tsin{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes tsout{to{opacity:0;transform:translateX(40px)}}
 
-/* ====== PROPERTY CARDS ====== */
-.properties-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;}
-.prop-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);border:1px solid var(--gray-light);}
-.prop-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
-.prop-img-wrap{position:relative;height:220px;overflow:hidden;background:var(--navy);}
-.prop-img-wrap img,.prop-img-wrap video{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
-.prop-card:hover .prop-img-wrap img{transform:scale(1.06);}
-.prop-badge{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--navy);font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:50px;}
-.prop-badge.sold{background:var(--danger);color:var(--white);}
-.prop-badge.featured{background:var(--navy);color:var(--gold);}
-.prop-body{padding:22px;}
-.prop-price{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold);font-weight:600;margin-bottom:6px;}
-.prop-title{font-size:1.1rem;color:var(--navy);font-weight:500;margin-bottom:8px;line-height:1.3;}
-.prop-location{display:flex;align-items:center;gap:6px;color:var(--gray);font-size:0.85rem;margin-bottom:16px;}
-.prop-features{display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--gray-light);flex-wrap:wrap;}
-.prop-feat{display:flex;align-items:center;gap:5px;color:var(--gray);font-size:0.82rem;}
-.prop-feat svg{color:var(--gold);}
-.prop-actions{display:flex;gap:10px;margin-top:16px;}
-.btn-sm{flex:1;padding:10px;border-radius:8px;font-size:0.85rem;font-weight:600;border:none;transition:var(--transition);text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;}
-.btn-navy{background:var(--navy);color:var(--white);}
-.btn-navy:hover{background:var(--navy-mid);}
-.btn-wa{background:#25D366;color:var(--white);}
-.btn-wa:hover{background:#1fb954;}
-.no-props{text-align:center;padding:80px 20px;color:var(--gray);}
-.no-props svg{width:64px;height:64px;opacity:0.3;margin-bottom:16px;}
+/* UTILS */
+.sec{padding:88px 5%;}
+.w{max-width:1200px;margin:0 auto;}
+.slbl{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.slbl::before{content:'';width:18px;height:2px;background:var(--gold);border-radius:2px;}
+.stitle{font-size:clamp(1.9rem,3.5vw,2.8rem);color:var(--navy);margin-bottom:14px;}
+.ssub{font-size:.95rem;color:var(--gray);line-height:1.75;max-width:540px;}
+.shead{margin-bottom:52px;}
+.shead.ctr{text-align:center;}
+.shead.ctr .slbl{justify-content:center;}
+.shead.ctr .ssub{margin:0 auto;}
+.dbar{width:44px;height:3px;background:var(--gold);border-radius:2px;margin-top:16px;}
+.shead.ctr .dbar{margin:16px auto 0;}
 
-/* ====== WHY US ====== */
-.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;}
-.why-card{background:var(--white);border-radius:var(--radius);padding:36px 28px;border:1px solid var(--gray-light);transition:var(--transition);position:relative;overflow:hidden;}
-.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:var(--transition);}
-.why-card:hover::before{transform:scaleX(1);}
-.why-card:hover{box-shadow:var(--shadow);transform:translateY(-4px);}
-.why-icon{width:56px;height:56px;background:var(--gold-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:1.6rem;}
-.why-title{font-size:1.2rem;color:var(--navy);margin-bottom:10px;font-weight:600;}
-.why-text{color:var(--gray);font-size:0.9rem;line-height:1.7;}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;font-weight:600;font-size:.9rem;padding:13px 26px;transition:var(--ease);cursor:pointer;white-space:nowrap;border:2px solid transparent;}
+.btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.btn-gold:hover{background:var(--gold2);border-color:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,151,63,.3);}
+.btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.3);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-navy{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.btn-navy:hover{background:var(--navy2);}
+.btn-wa{background:#22c55e;color:var(--white);border-color:#22c55e;}
+.btn-wa:hover{background:var(--green);}
+.btn-outline{background:transparent;color:var(--navy);border-color:var(--border);}
+.btn-outline:hover{border-color:var(--navy);background:var(--navy);color:var(--white);}
+.sbtn{background:var(--gold);color:var(--navy);border:none;border-radius:8px;padding:9px 18px;font-size:.82rem;font-weight:600;cursor:pointer;transition:var(--ease);font-family:'Inter',sans-serif;}
+.sbtn:hover{background:var(--gold2);}
 
-/* ====== TESTIMONIALS ====== */
-.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
-.testi-card{background:var(--navy);border-radius:var(--radius);padding:32px;color:var(--white);}
-.testi-stars{color:var(--gold);margin-bottom:16px;font-size:1.1rem;letter-spacing:2px;}
-.testi-text{font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.8);margin-bottom:24px;font-style:italic;}
-.testi-author{display:flex;align-items:center;gap:14px;}
-.testi-avatar{width:46px;height:46px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--navy);font-weight:700;flex-shrink:0;}
-.testi-name{font-weight:600;font-size:0.95rem;}
-.testi-role{color:var(--gold);font-size:0.8rem;margin-top:2px;}
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--navy);overflow:hidden;padding-top:70px;}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(125deg,#0b1f3a 0%,#112848 50%,#0f2540 100%);}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(200,151,63,.06) 1px,transparent 1px);background-size:30px 30px;}
+.hero-glow{position:absolute;top:-20%;right:-5%;width:550px;height:550px;background:radial-gradient(circle,rgba(200,151,63,.1) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:60px 5%;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(200,151,63,.1);border:1px solid rgba(200,151,63,.22);color:var(--gold2);font-size:.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;border-radius:50px;margin-bottom:28px;}
+.hero-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:blink 2s infinite;flex-shrink:0;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-h1{font-size:clamp(2.4rem,4.5vw,4rem);color:var(--white);line-height:1.12;margin-bottom:20px;font-weight:700;}
+.hero-h1 em{color:var(--gold);font-style:normal;}
+.hero-p{font-size:1rem;color:rgba(255,255,255,.65);line-height:1.78;margin-bottom:36px;max-width:480px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:12px;overflow:hidden;}
+.hstat{background:rgba(255,255,255,.04);padding:18px 14px;text-align:center;}
+.hstat-n{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);font-weight:700;display:block;line-height:1;}
+.hstat-l{font-size:.68rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-top:5px;display:block;}
+.hero-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.hcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);padding:22px 18px;backdrop-filter:blur(6px);transition:var(--ease);}
+.hcard:hover{background:rgba(255,255,255,.09);transform:translateY(-3px);}
+.hcard-icon{font-size:1.7rem;margin-bottom:10px;}
+.hcard-title{color:var(--white);font-size:.88rem;font-weight:600;margin-bottom:5px;}
+.hcard-text{color:rgba(255,255,255,.45);font-size:.78rem;line-height:1.5;}
+.hcard.span2{grid-column:span 2;}
 
-/* ====== ABOUT ====== */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.about-img-wrap{position:relative;}
-.about-img-wrap img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);}
-.about-badge{position:absolute;bottom:-24px;right:-24px;background:var(--gold);color:var(--navy);border-radius:var(--radius);padding:24px;text-align:center;min-width:140px;}
-.about-badge-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;display:block;line-height:1;}
-.about-badge-text{font-size:0.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
-.about-content h2{font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--navy);margin-bottom:20px;}
-.about-content p{color:var(--gray);line-height:1.8;margin-bottom:16px;font-size:0.95rem;}
-.about-vals{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;}
-.about-val{display:flex;align-items:flex-start;gap:12px;}
-.val-dot{width:10px;height:10px;background:var(--gold);border-radius:50%;margin-top:6px;flex-shrink:0;}
-.val-text strong{display:block;color:var(--navy);font-weight:600;font-size:0.9rem;margin-bottom:3px;}
-.val-text span{color:var(--gray);font-size:0.82rem;}
+/* STATSBAR */
+.sbar{background:var(--white);border-bottom:1px solid var(--border);}
+.sbar-inner{max-width:1200px;margin:0 auto;padding:0 5%;display:grid;grid-template-columns:repeat(4,1fr);}
+.sbar-item{padding:26px 20px;border-right:1px solid var(--border);text-align:center;}
+.sbar-item:last-child{border-right:none;}
+.sbar-n{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--navy);font-weight:700;}
+.sbar-n span{color:var(--gold);}
+.sbar-l{font-size:.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
 
-/* ====== CONTACT ====== */
-.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:start;}
-.contact-info{background:var(--navy);border-radius:var(--radius);padding:48px;color:var(--white);}
-.contact-info h3{font-size:1.8rem;margin-bottom:8px;}
-.contact-info p{color:rgba(255,255,255,0.6);margin-bottom:36px;font-size:0.9rem;line-height:1.7;}
-.contact-item{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;}
-.contact-icon{width:44px;height:44px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.25);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem;}
-.contact-label{color:var(--gold);font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
-.contact-value{color:var(--white);font-size:0.95rem;}
-.contact-form{background:var(--white);border-radius:var(--radius);padding:48px;box-shadow:var(--shadow-sm);}
-.form-group{margin-bottom:20px;}
-.form-group label{display:block;font-size:0.85rem;font-weight:500;color:var(--navy);margin-bottom:8px;}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1.5px solid var(--gray-light);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--navy);transition:var(--transition);background:var(--off-white);}
-.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);background:var(--white);}
-.form-group textarea{height:130px;resize:vertical;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+/* PROPERTY CARDS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px;}
+.pcard{background:var(--white);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh3);border:1px solid var(--border);transition:var(--ease);display:flex;flex-direction:column;}
+.pcard:hover{transform:translateY(-6px);box-shadow:var(--sh2);}
+.pcard-img{position:relative;height:228px;overflow:hidden;background:var(--navy2);flex-shrink:0;}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.pcard:hover .pcard-img img{transform:scale(1.07);}
+.pcard-noimg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,var(--navy),var(--navy3));}
+.pbadge{position:absolute;top:12px;left:12px;padding:5px 12px;border-radius:50px;font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;}
+.pb-avail{background:var(--gold);color:var(--navy);}
+.pb-sold{background:var(--red);color:var(--white);}
+.pb-off{background:var(--navy);color:var(--gold2);}
+.pb-feat{background:rgba(11,31,58,.82);color:var(--gold2);backdrop-filter:blur(4px);}
+.ppricetag{position:absolute;bottom:12px;right:12px;background:rgba(11,31,58,.85);backdrop-filter:blur(6px);color:var(--gold2);font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;padding:6px 13px;border-radius:7px;}
+.pcard-body{padding:20px 20px 18px;flex:1;display:flex;flex-direction:column;}
+.pcard-title{font-size:1.05rem;color:var(--navy);font-weight:600;margin-bottom:7px;line-height:1.35;font-family:'Playfair Display',serif;}
+.pcard-loc{display:flex;align-items:flex-start;gap:5px;color:var(--gray);font-size:.81rem;margin-bottom:14px;line-height:1.4;}
+.pmeta{display:flex;gap:14px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px;}
+.pmet{display:flex;align-items:center;gap:5px;color:var(--gray);font-size:.78rem;}
+.pcard-btns{display:flex;gap:8px;margin-top:auto;}
+.pcbtn{flex:1;padding:10px;border-radius:8px;font-size:.83rem;font-weight:600;border:none;cursor:pointer;transition:var(--ease);display:flex;align-items:center;justify-content:center;gap:5px;}
+.pcbtn-view{background:var(--navy);color:var(--white);}
+.pcbtn-view:hover{background:var(--navy3);}
+.pcbtn-wa{background:#22c55e;color:var(--white);}
+.pcbtn-wa:hover{background:var(--green);}
+.no-props{text-align:center;padding:72px 20px;color:var(--gray);grid-column:1/-1;}
+.no-props-ic{font-size:3.5rem;display:block;margin-bottom:14px;opacity:.3;}
 
-/* ====== PROPERTY DETAIL ====== */
-#page-detail{background:var(--off-white);}
-.detail-hero{position:relative;background:var(--navy);}
-.gallery-main{height:480px;position:relative;overflow:hidden;}
-.gallery-main img,.gallery-main video{width:100%;height:100%;object-fit:cover;}
-.gallery-nav{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;}
-.gal-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;border:none;transition:var(--transition);}
-.gal-dot.active{background:var(--gold);width:24px;border-radius:4px;}
-.gallery-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,22,40,0.6);border:none;color:var(--white);width:44px;height:44px;border-radius:50%;font-size:1.1rem;cursor:pointer;transition:var(--transition);}
-.gallery-arr:hover{background:var(--gold);color:var(--navy);}
-.gallery-arr.prev{left:20px;}
-.gallery-arr.next{right:20px;}
-.gallery-thumbs{display:flex;gap:8px;padding:12px 24px;background:var(--navy);overflow-x:auto;}
-.gallery-thumbs::-webkit-scrollbar{height:4px;}
-.gallery-thumbs::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
-.gal-thumb{width:80px;height:56px;border-radius:6px;overflow:hidden;cursor:pointer;flex-shrink:0;border:2px solid transparent;transition:var(--transition);}
-.gal-thumb.active{border-color:var(--gold);}
-.gal-thumb img,.gal-thumb video{width:100%;height:100%;object-fit:cover;}
-.detail-body{display:grid;grid-template-columns:1fr 380px;gap:48px;padding:60px 5%;max-width:1400px;margin:0 auto;}
-.detail-main h1{font-size:clamp(1.8rem,3vw,2.6rem);color:var(--navy);margin-bottom:12px;}
-.detail-price{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);font-weight:600;margin-bottom:8px;}
-.detail-location{display:flex;align-items:center;gap:8px;color:var(--gray);font-size:0.9rem;margin-bottom:32px;}
-.detail-features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
-.feat-box{background:var(--white);border-radius:10px;padding:18px;border:1px solid var(--gray-light);text-align:center;}
-.feat-box-icon{font-size:1.4rem;margin-bottom:8px;display:block;}
-.feat-box-val{font-weight:600;color:var(--navy);font-size:0.9rem;}
-.feat-box-label{color:var(--gray);font-size:0.75rem;margin-top:2px;}
-.detail-section{margin-bottom:36px;}
-.detail-section h3{font-size:1.3rem;color:var(--navy);margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--gray-light);}
-.detail-section p{color:var(--gray);line-height:1.8;font-size:0.95rem;}
-.detail-sidebar{position:sticky;top:100px;}
-.sidebar-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-light);margin-bottom:24px;}
-.sidebar-card h3{font-size:1.2rem;color:var(--navy);margin-bottom:20px;}
-.sidebar-price{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);font-weight:600;margin-bottom:24px;}
-.btn-full{width:100%;padding:14px;border-radius:10px;font-size:0.95rem;font-weight:600;border:none;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;transition:var(--transition);}
-.back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--white);background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:10px 20px;border-radius:8px;font-size:0.9rem;cursor:pointer;transition:var(--transition);margin:20px 5%;position:relative;z-index:2;}
-.back-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+/* WHY CARDS */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:22px;}
+.wcard{background:var(--white);border-radius:var(--r);padding:34px 28px;border:1px solid var(--border);transition:var(--ease);position:relative;overflow:hidden;}
+.wcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:var(--ease);}
+.wcard:hover{box-shadow:var(--sh1);transform:translateY(-4px);}
+.wcard:hover::after{transform:scaleX(1);}
+.wcard-ic{width:52px;height:52px;background:var(--gold3);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:18px;}
+.wcard-title{font-size:1.05rem;color:var(--navy);margin-bottom:9px;font-weight:600;}
+.wcard-txt{color:var(--gray);font-size:.87rem;line-height:1.72;}
 
-/* ====== CTA SECTION ====== */
-.cta-section{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:100px 5%;text-align:center;position:relative;overflow:hidden;}
-.cta-section::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="29" fill="none" stroke="rgba(201,168,76,0.06)" stroke-width="1"/></svg>') center/60px repeat;opacity:1;}
-.cta-section h2{font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:16px;}
-.cta-section p{color:rgba(255,255,255,0.6);font-size:1rem;max-width:500px;margin:0 auto 40px;line-height:1.7;}
+/* TESTIMONIALS */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;}
+.tcard{background:var(--navy);border-radius:var(--r);padding:30px;position:relative;overflow:hidden;}
+.tcard::before{content:'"';position:absolute;top:-12px;right:18px;font-family:'Playfair Display',serif;font-size:7rem;color:rgba(200,151,63,.07);line-height:1;pointer-events:none;}
+.tstars{color:var(--gold);font-size:.9rem;letter-spacing:2px;margin-bottom:14px;}
+.ttxt{color:rgba(255,255,255,.72);font-size:.9rem;line-height:1.8;margin-bottom:22px;font-style:italic;}
+.tauthor{display:flex;align-items:center;gap:12px;}
+.tav{width:42px;height:42px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);font-weight:700;flex-shrink:0;}
+.tname{color:var(--white);font-weight:600;font-size:.88rem;}
+.trole{color:var(--gold2);font-size:.76rem;margin-top:2px;}
 
-/* ====== FOOTER ====== */
-footer{background:var(--black);color:var(--white);padding:80px 5% 40px;}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:60px;margin-bottom:64px;}
-.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--white);margin-bottom:16px;}
-.footer-logo span{color:var(--gold);}
-.footer-desc{color:rgba(255,255,255,0.5);font-size:0.85rem;line-height:1.8;margin-bottom:24px;}
-.footer-socials{display:flex;gap:10px;}
-.social-btn{width:38px;height:38px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:var(--transition);font-size:0.85rem;}
-.social-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);}
-.footer-col h4{color:var(--white);font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:20px;}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.footer-links a{color:rgba(255,255,255,0.5);font-size:0.85rem;transition:var(--transition);}
-.footer-links a:hover{color:var(--gold);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;gap:16px;}
-.footer-bottom p{color:rgba(255,255,255,0.35);font-size:0.82rem;}
-.footer-bottom a{color:var(--gold);transition:var(--transition);}
+/* ABOUT */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center;}
+.avis{position:relative;}
+.aimg{width:100%;height:440px;background:linear-gradient(135deg,var(--navy),var(--navy3));border-radius:var(--r);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.abadge{position:absolute;bottom:-18px;right:-18px;background:var(--gold);color:var(--navy);border-radius:var(--r);padding:18px 22px;text-align:center;min-width:120px;box-shadow:var(--sh1);}
+.abadge-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;display:block;line-height:1;}
+.abadge-l{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+.acontent p{color:var(--gray);font-size:.92rem;line-height:1.82;margin-bottom:14px;}
+.avals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px;}
+.aval{display:flex;align-items:flex-start;gap:9px;}
+.aval-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;margin-top:5px;flex-shrink:0;}
+.aval-lbl{font-size:.87rem;color:var(--navy);font-weight:600;margin-bottom:1px;}
+.aval-sub{font-size:.78rem;color:var(--gray);}
 
-/* ====== ADMIN ====== */
-#admin-login{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:20px;}
-.login-box{background:var(--white);border-radius:var(--radius);padding:52px;width:100%;max-width:440px;box-shadow:0 24px 60px rgba(0,0,0,0.4);}
-.login-box h2{font-size:2rem;color:var(--navy);margin-bottom:6px;}
-.login-box p{color:var(--gray);font-size:0.9rem;margin-bottom:36px;}
-.login-logo{text-align:center;margin-bottom:32px;}
-.login-logo-icon{width:64px;height:64px;background:var(--gold);border-radius:16px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--navy);font-weight:700;}
+/* CTA BAND */
+.cta{background:linear-gradient(130deg,var(--navy) 0%,var(--navy2) 50%,var(--navy3) 100%);position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(200,151,63,.1),transparent 60%);}
+.cta-inner{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:76px 5%;text-align:center;}
+.cta-inner h2{font-size:clamp(1.8rem,3.5vw,2.7rem);color:var(--white);margin-bottom:14px;}
+.cta-inner p{color:rgba(255,255,255,.58);margin-bottom:32px;font-size:.96rem;line-height:1.7;max-width:500px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 
-#admin-panel{background:#f0f2f5;min-height:100vh;}
-.admin-sidebar{position:fixed;left:0;top:0;bottom:0;width:260px;background:var(--navy);overflow-y:auto;z-index:100;}
-.admin-logo{padding:28px 24px;border-bottom:1px solid rgba(255,255,255,0.07);}
-.admin-logo h3{font-family:'Cormorant Garamond',serif;color:var(--white);font-size:1.3rem;}
-.admin-logo span{color:var(--gold);font-size:0.75rem;font-family:'DM Sans',sans-serif;}
-.admin-nav{padding:16px 0;}
-.admin-nav-item{display:flex;align-items:center;gap:12px;padding:12px 24px;color:rgba(255,255,255,0.6);font-size:0.9rem;cursor:pointer;transition:var(--transition);}
-.admin-nav-item:hover,.admin-nav-item.active{background:rgba(201,168,76,0.1);color:var(--gold);}
-.admin-nav-item svg{width:18px;height:18px;flex-shrink:0;}
-.admin-main{margin-left:260px;padding:32px;}
-.admin-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;}
-.admin-topbar h2{font-size:1.6rem;color:var(--navy);}
-.admin-section{display:none;}
-.admin-section.active{display:block;}
+/* CONTACT */
+.cgrid{display:grid;grid-template-columns:1fr 1.4fr;gap:52px;align-items:start;}
+.cinfo{background:var(--navy);border-radius:var(--r);padding:42px 34px;color:var(--white);}
+.cinfo h3{font-size:1.6rem;margin-bottom:7px;}
+.cinfo p{color:rgba(255,255,255,.52);font-size:.87rem;line-height:1.7;margin-bottom:32px;}
+.citem{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;}
+.cic{width:42px;height:42px;background:rgba(200,151,63,.1);border:1px solid rgba(200,151,63,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
+.cil{font-size:.7rem;color:var(--gold2);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.civ{color:var(--white);font-size:.92rem;}
+.cform{background:var(--white);border-radius:var(--r);padding:42px 34px;box-shadow:var(--sh1);border:1px solid var(--border);}
+.cform h3{font-size:1.55rem;color:var(--navy);margin-bottom:6px;}
+.cform p{color:var(--gray);font-size:.87rem;margin-bottom:26px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{margin-bottom:16px;}
+.fg label{display:block;font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:6px;}
+.fg input,.fg textarea,.fg select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;color:var(--navy);background:var(--off);transition:var(--ease);}
+.fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--gold);background:var(--white);}
+.fg textarea{height:115px;resize:vertical;}
 
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:32px;}
-.stat-card{background:var(--white);border-radius:var(--radius);padding:24px;border-left:4px solid var(--gold);box-shadow:var(--shadow-sm);}
-.stat-card-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--navy);font-weight:600;}
-.stat-card-label{color:var(--gray);font-size:0.85rem;margin-top:4px;}
+/* PAGE HERO */
+.phero{padding-top:70px;background:var(--navy);}
+.phero-inner{max-width:1200px;margin:0 auto;padding:68px 5%;}
+.phero-inner .slbl{color:var(--gold2);}
+.phero-inner h1{font-size:clamp(2rem,4vw,3.2rem);color:var(--white);margin-bottom:14px;}
+.phero-inner p{color:rgba(255,255,255,.58);max-width:560px;line-height:1.75;font-size:.96rem;}
 
-.card{background:var(--white);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
-.card h3{font-size:1.2rem;color:var(--navy);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--gray-light);}
+/* PROPERTY DETAIL */
+#page-detail{background:var(--off);}
+.dtop{background:var(--navy);padding-top:70px;}
+.dback{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.65);font-size:.87rem;padding:12px 5% 0;cursor:pointer;transition:var(--ease);background:none;border:none;}
+.dback:hover{color:var(--gold2);}
+.gmain{height:480px;position:relative;overflow:hidden;background:var(--navy2);}
+.gmain img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;}
+.gmain iframe,.gmain video{width:100%;height:100%;border:none;}
+.gmain .gnone{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;color:rgba(255,255,255,.1);}
+.garr{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(11,31,58,.68);backdrop-filter:blur(5px);border:1px solid rgba(255,255,255,.12);color:var(--white);font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--ease);}
+.garr:hover{background:var(--gold);color:var(--navy);}
+.garr.prev{left:18px;}
+.garr.next{right:18px;}
+.gctr{position:absolute;bottom:14px;right:14px;background:rgba(11,31,58,.72);backdrop-filter:blur(5px);color:var(--white);font-size:.76rem;padding:5px 12px;border-radius:50px;}
+.gthumbs{display:flex;gap:8px;padding:10px 5%;background:var(--navy2);overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;}
+.gthumb{width:78px;height:55px;border-radius:6px;overflow:hidden;cursor:pointer;flex-shrink:0;border:2px solid transparent;transition:var(--ease);background:var(--navy);}
+.gthumb img{width:100%;height:100%;object-fit:cover;}
+.gthumb.act{border-color:var(--gold);}
+.gthumb-vid{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:rgba(255,255,255,.5);}
+.dbody{max-width:1200px;margin:0 auto;padding:52px 5%;display:grid;grid-template-columns:1fr 370px;gap:44px;align-items:start;}
+.dtitle{font-size:clamp(1.6rem,3vw,2.3rem);color:var(--navy);margin-bottom:9px;}
+.dprice{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);font-weight:700;margin-bottom:9px;}
+.dloc{display:flex;align-items:center;gap:6px;color:var(--gray);font-size:.88rem;margin-bottom:28px;}
+.dfeats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+.dfeat{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.dfeat-ic{font-size:1.25rem;margin-bottom:6px;display:block;}
+.dfeat-v{font-weight:700;color:var(--navy);font-size:.86rem;}
+.dfeat-l{color:var(--gray);font-size:.73rem;margin-top:2px;}
+.dsect{margin-bottom:28px;}
+.dsect h3{font-size:1.15rem;color:var(--navy);padding-bottom:11px;border-bottom:2px solid var(--border);margin-bottom:14px;}
+.dsect p{color:var(--gray);line-height:1.82;font-size:.91rem;}
+.flist{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px;}
+.fitem{display:flex;align-items:center;gap:7px;font-size:.87rem;color:var(--gray);}
+.fitem svg{color:var(--gold);flex-shrink:0;}
+.dvideo{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--navy);}
+.dvideo iframe,.dvideo video{width:100%;height:100%;border:none;}
+.dside{position:sticky;top:84px;}
+.dsc{background:var(--white);border-radius:var(--r);padding:26px;box-shadow:var(--sh1);border:1px solid var(--border);margin-bottom:18px;}
+.dsc h3{font-size:1.05rem;color:var(--navy);margin-bottom:16px;}
+.dsc-price{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--gold);font-weight:700;margin-bottom:20px;}
+.dsc-btns{display:flex;flex-direction:column;gap:9px;}
+.dscbtn{width:100%;padding:12px;border-radius:9px;font-size:.88rem;font-weight:600;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:var(--ease);}
+.dscbtn.wa{background:#22c55e;color:var(--white);}
+.dscbtn.wa:hover{background:var(--green);}
+.dscbtn.call{background:var(--navy);color:var(--white);}
+.dscbtn.call:hover{background:var(--navy3);}
+.ddr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:.87rem;}
+.ddr:last-child{border-bottom:none;}
+.ddk{color:var(--gray);}
+.ddv{color:var(--navy);font-weight:600;text-align:right;}
 
-.admin-table{width:100%;border-collapse:collapse;}
-.admin-table th{text-align:left;padding:12px 16px;background:var(--off-white);color:var(--gray);font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;}
-.admin-table td{padding:14px 16px;border-bottom:1px solid var(--gray-light);font-size:0.9rem;vertical-align:middle;}
-.admin-table tr:last-child td{border-bottom:none;}
-.admin-table tr:hover td{background:var(--off-white);}
-.badge{display:inline-block;padding:4px 10px;border-radius:50px;font-size:0.75rem;font-weight:600;}
-.badge-green{background:rgba(46,204,113,0.1);color:#27ae60;}
-.badge-gray{background:rgba(138,154,181,0.1);color:var(--gray);}
-.badge-red{background:rgba(231,76,60,0.1);color:var(--danger);}
-.action-btns{display:flex;gap:6px;}
-.icon-btn{width:32px;height:32px;border-radius:6px;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);font-size:0.85rem;}
-.icon-btn.edit{background:rgba(10,22,40,0.07);color:var(--navy);}
-.icon-btn.edit:hover{background:var(--navy);color:var(--white);}
-.icon-btn.del{background:rgba(231,76,60,0.08);color:var(--danger);}
-.icon-btn.del:hover{background:var(--danger);color:var(--white);}
-.icon-btn.view{background:rgba(201,168,76,0.1);color:var(--gold);}
-.icon-btn.view:hover{background:var(--gold);color:var(--navy);}
-.icon-btn.toggle{background:rgba(46,204,113,0.1);color:#27ae60;}
-.icon-btn.toggle:hover{background:#27ae60;color:var(--white);}
-.icon-btn.toggle.hidden-prop{background:rgba(138,154,181,0.1);color:var(--gray);}
+/* ADMIN LOGIN */
+#page-admin-login{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:20px;}
+.lcard{background:var(--white);border-radius:var(--r);padding:50px 42px;width:100%;max-width:415px;box-shadow:0 32px 80px rgba(0,0,0,.4);}
+.lbrand{text-align:center;margin-bottom:32px;}
+.lbrand-ic{width:58px;height:58px;background:var(--gold);border-radius:13px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--navy);font-weight:700;}
+.lbrand h2{font-size:1.75rem;color:var(--navy);margin-bottom:4px;}
+.lbrand p{color:var(--gray);font-size:.87rem;}
 
-/* Modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(10,22,40,0.75);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--white);border-radius:var(--radius);width:100%;max-width:760px;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.35);}
-.modal-header{display:flex;align-items:center;justify-content:space-between;padding:24px 28px;border-bottom:1px solid var(--gray-light);}
-.modal-header h3{font-size:1.3rem;color:var(--navy);}
-.modal-close{background:none;border:none;font-size:1.4rem;color:var(--gray);cursor:pointer;transition:var(--transition);}
-.modal-close:hover{color:var(--danger);}
-.modal-body{padding:28px;}
-.modal-footer{padding:20px 28px;border-top:1px solid var(--gray-light);display:flex;justify-content:flex-end;gap:12px;}
+/* ADMIN PANEL */
+#page-admin-panel{background:#f0f3f8;min-height:100vh;}
+.aside{position:fixed;left:0;top:0;bottom:0;width:248px;background:var(--navy);overflow-y:auto;z-index:200;transition:var(--ease);}
+.aside-brand{padding:22px 18px;border-bottom:1px solid rgba(255,255,255,.07);}
+.aside-brand h3{font-family:'Playfair Display',serif;color:var(--white);font-size:1.05rem;}
+.aside-brand span{color:var(--gold2);font-size:.68rem;letter-spacing:1px;}
+.anav{padding:10px 0;}
+.anav-item{display:flex;align-items:center;gap:11px;padding:11px 18px;color:rgba(255,255,255,.52);font-size:.87rem;cursor:pointer;transition:var(--ease);}
+.anav-item:hover,.anav-item.act{color:var(--gold2);background:rgba(200,151,63,.07);}
+.anav-item svg{width:16px;height:16px;flex-shrink:0;}
+.anav-sep{border-top:1px solid rgba(255,255,255,.06);margin:6px 0;}
+.amain{margin-left:248px;padding:26px 30px;min-height:100vh;}
+.atopbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.atopbar h2{font-size:1.45rem;color:var(--navy);}
+.atopbar p{color:var(--gray);font-size:.81rem;margin-top:2px;}
+.asec{display:none;}
+.asec.act{display:block;}
 
-/* Media preview grid */
-.media-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:12px;}
-.media-thumb{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:1;background:var(--navy);}
-.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;}
-.media-thumb-del{position:absolute;top:4px;right:4px;width:24px;height:24px;background:rgba(231,76,60,0.9);border:none;color:var(--white);border-radius:50%;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.upload-area{border:2px dashed var(--gray-light);border-radius:10px;padding:32px;text-align:center;cursor:pointer;transition:var(--transition);}
-.upload-area:hover{border-color:var(--gold);background:var(--gold-pale);}
-.upload-area input{display:none;}
+.srow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.sbox{background:var(--white);border-radius:var(--r2);padding:20px;border-left:4px solid var(--gold);box-shadow:var(--sh3);}
+.sbox-n{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--navy);font-weight:700;}
+.sbox-l{color:var(--gray);font-size:.78rem;margin-top:3px;}
+.acard{background:var(--white);border-radius:var(--r2);padding:22px;box-shadow:var(--sh3);margin-bottom:20px;}
+.acard-t{font-size:1.05rem;color:var(--navy);margin-bottom:16px;padding-bottom:11px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 
-/* Toast */
-#toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px;}
-.toast{background:var(--navy);color:var(--white);padding:14px 20px;border-radius:10px;font-size:0.9rem;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);animation:slideIn 0.3s ease,fadeOut 0.3s ease 2.7s forwards;}
-.toast.success{border-left:3px solid var(--success);}
-.toast.error{border-left:3px solid var(--danger);}
-@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
-@keyframes fadeOut{to{opacity:0;transform:translateX(40px)}}
+.atable{width:100%;border-collapse:collapse;}
+.atable th{text-align:left;padding:9px 13px;background:var(--off);color:var(--gray);font-size:.73rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;}
+.atable td{padding:12px 13px;border-bottom:1px solid var(--border);font-size:.87rem;vertical-align:middle;}
+.atable tr:last-child td{border-bottom:none;}
+.atable tr:hover td{background:var(--off);}
+.abtns{display:flex;gap:5px;}
+.abtn{width:28px;height:28px;border-radius:6px;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--ease);font-size:.82rem;}
+.abtn.e{background:rgba(11,31,58,.07);color:var(--navy);}
+.abtn.e:hover{background:var(--navy);color:var(--white);}
+.abtn.d{background:rgba(220,38,38,.07);color:var(--red);}
+.abtn.d:hover{background:var(--red);color:var(--white);}
+.abtn.t{background:rgba(22,163,74,.07);color:var(--green);}
+.abtn.t:hover{background:var(--green);color:var(--white);}
+.abtn.v{background:rgba(200,151,63,.09);color:var(--gold);}
+.abtn.v:hover{background:var(--gold);color:var(--navy);}
+.sbdg{display:inline-block;padding:3px 9px;border-radius:50px;font-size:.7rem;font-weight:600;}
+.sbg{background:rgba(22,163,74,.1);color:var(--green);}
+.sbgr{background:rgba(122,143,166,.1);color:var(--gray);}
+.sbr{background:rgba(220,38,38,.1);color:var(--red);}
+.sbgo{background:rgba(200,151,63,.1);color:var(--gold);}
 
-/* Image fullscreen */
-.img-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:3000;display:flex;align-items:center;justify-content:center;cursor:zoom-out;}
-.img-overlay img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;}
-.img-overlay-close{position:absolute;top:24px;right:24px;background:rgba(255,255,255,0.1);border:none;color:var(--white);width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;}
+/* MODAL */
+.mbg{position:fixed;inset:0;background:rgba(11,31,58,.72);z-index:1000;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mbg.open{opacity:1;pointer-events:all;}
+.mbox{background:var(--white);border-radius:var(--r);width:100%;max-width:780px;max-height:92vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,.4);}
+.mhead{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);}
+.mhead h3{font-size:1.15rem;color:var(--navy);}
+.mclose{background:none;border:none;font-size:1.3rem;color:var(--gray);cursor:pointer;transition:var(--ease);line-height:1;padding:4px;}
+.mclose:hover{color:var(--red);}
+.mbody{padding:24px;}
+.mfoot{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;}
+.mcancel{padding:8px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--gray);font-size:.87rem;cursor:pointer;transition:var(--ease);font-family:'Inter',sans-serif;}
+.mcancel:hover{border-color:var(--gray);}
 
-/* ====== PROMO BANNER ====== */
-.promo-banner{background:linear-gradient(90deg,var(--navy-mid),var(--navy));border-bottom:1px solid rgba(201,168,76,0.2);padding:12px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-.promo-banner-text{color:var(--white);font-size:0.88rem;display:flex;align-items:center;gap:10px;}
-.promo-banner-text span{background:var(--gold);color:var(--navy);font-size:0.72rem;font-weight:700;letter-spacing:1px;padding:3px 8px;border-radius:4px;text-transform:uppercase;}
-.promo-banner-close{background:none;border:none;color:rgba(255,255,255,0.5);font-size:1.1rem;cursor:pointer;flex-shrink:0;transition:var(--transition);}
-.promo-banner-close:hover{color:var(--white);}
+/* URL media */
+.url-row{display:flex;gap:8px;align-items:center;margin-bottom:7px;}
+.url-row input{flex:1;}
+.url-del{width:30px;height:30px;border-radius:7px;background:rgba(220,38,38,.07);color:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem;transition:var(--ease);}
+.url-del:hover{background:var(--red);color:var(--white);}
+.add-url{display:inline-flex;align-items:center;gap:5px;color:var(--gold);font-size:.81rem;font-weight:600;cursor:pointer;background:none;border:none;padding:5px 0;font-family:'Inter',sans-serif;}
+.add-url:hover{color:var(--gold2);}
+.prev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:9px;margin-top:12px;}
+.prev-item{border-radius:7px;overflow:hidden;aspect-ratio:1;background:var(--navy);}
+.prev-item img{width:100%;height:100%;object-fit:cover;}
+.prev-btn{display:inline-flex;align-items:center;gap:5px;color:var(--gray);font-size:.78rem;cursor:pointer;background:none;border:none;padding:5px 0;font-family:'Inter',sans-serif;transition:var(--ease);margin-top:5px;}
+.prev-btn:hover{color:var(--navy);}
 
-/* ====== RECENTLY VIEWED ====== */
-.recently-viewed{padding:24px 5%;background:var(--off-white);border-bottom:1px solid var(--gray-light);}
-.recently-viewed-inner{display:none;}
-.recently-viewed-inner.has-items{display:block;}
-.recently-viewed h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.recently-viewed h4::before{content:'👁';font-size:0.9rem;}
-.rv-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
-.rv-scroll::-webkit-scrollbar{display:none;}
-.rv-card{flex:0 0 160px;background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--gray-light);cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-sm);}
-.rv-card:hover{border-color:var(--gold);transform:translateY(-2px);}
-.rv-card-img{height:90px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
-.rv-card-info{padding:8px 10px;}
-.rv-card-title{font-size:0.78rem;font-weight:600;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.rv-card-price{font-size:0.73rem;color:var(--gold);margin-top:2px;}
+/* FOOTER */
+footer{background:var(--black);color:var(--white);padding:68px 5% 30px;}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:52px;margin-bottom:52px;}
+.fbrand{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--white);margin-bottom:12px;}
+.fbrand span{color:var(--gold);}
+.fdesc{color:rgba(255,255,255,.38);font-size:.83rem;line-height:1.8;margin-bottom:20px;}
+.fsocs{display:flex;gap:8px;}
+.fsoc{width:35px;height:35px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:var(--ease);}
+.fsoc:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.fcol h4{font-family:'Playfair Display',serif;color:var(--white);font-size:.98rem;margin-bottom:16px;}
+.flinks{display:flex;flex-direction:column;gap:9px;}
+.flinks a{color:rgba(255,255,255,.38);font-size:.82rem;transition:var(--ease);}
+.flinks a:hover{color:var(--gold2);}
+.fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.fbot p{color:rgba(255,255,255,.28);font-size:.8rem;}
 
-/* ====== INSTALL APP ====== */
-#install-app-btn{display:none;align-items:center;gap:6px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);color:var(--gold);font-size:0.8rem;font-weight:500;padding:7px 14px;border-radius:7px;cursor:pointer;transition:var(--transition);white-space:nowrap;}
-#install-app-btn:hover{background:var(--gold);color:var(--navy);}
-#install-app-btn.visible{display:flex;}
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:5000;align-items:center;justify-content:center;cursor:zoom-out;}
+#lightbox.show{display:flex;}
+.lb-close{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.1);border:none;color:white;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--ease);}
+.lb-close:hover{background:rgba(255,255,255,.2);}
 
-/* Responsive */
+/* RESPONSIVE */
 @media(max-width:1024px){
-  .footer-grid{grid-template-columns:1fr 1fr;}
-  .about-grid{grid-template-columns:1fr;}
-  .about-img-wrap{max-width:500px;margin:0 auto;}
-  .contact-grid{grid-template-columns:1fr;}
-  .detail-body{grid-template-columns:1fr;}
-  .detail-sidebar{position:static;}
-  .stats-grid{grid-template-columns:1fr 1fr;}
-  .admin-sidebar{width:220px;}
-  .admin-main{margin-left:220px;}
+  .hero-inner{grid-template-columns:1fr;gap:44px;}
+  .hero-right{display:none;}
+  .agrid{grid-template-columns:1fr;}
+  .avis{max-width:480px;margin:0 auto;}
+  .cgrid{grid-template-columns:1fr;}
+  .dbody{grid-template-columns:1fr;}
+  .dside{position:static;}
+  .fgrid{grid-template-columns:1fr 1fr;}
+  .srow{grid-template-columns:1fr 1fr;}
+  .aside{width:216px;}
+  .amain{margin-left:216px;}
 }
 @media(max-width:768px){
   .nav-links{display:none;}
   .hamburger{display:flex;}
-  .hero-stats{gap:24px;}
-  .footer-grid{grid-template-columns:1fr;}
-  .admin-sidebar{transform:translateX(-100%);transition:var(--transition);}
-  .admin-sidebar.open{transform:translateX(0);}
-  .admin-main{margin-left:0;}
-  .stats-grid{grid-template-columns:1fr 1fr;}
-  .form-row{grid-template-columns:1fr;}
-  .detail-features{grid-template-columns:1fr 1fr;}
-  .gallery-main{height:300px;}
+  .sbar-inner{grid-template-columns:1fr 1fr;}
+  .sbar-item:nth-child(2){border-right:none;}
+  .sbar-item:nth-child(3){border-top:1px solid var(--border);}
+  .sbar-item:nth-child(4){border-top:1px solid var(--border);border-right:none;}
+  .fgrid{grid-template-columns:1fr;}
+  .aside{transform:translateX(-100%);}
+  .aside.open{transform:translateX(0);}
+  .amain{margin-left:0;padding:18px 14px;}
+  .frow{grid-template-columns:1fr;}
+  .gmain{height:290px;}
+  .dfeats{grid-template-columns:1fr 1fr;}
 }
-@media(max-width:480px){
-  .hero-stats{flex-wrap:wrap;gap:20px;}
-  .stats-grid{grid-template-columns:1fr;}
-  .properties-grid{grid-template-columns:1fr;}
-  .about-vals{grid-template-columns:1fr;}
+@media(max-width:540px){
+  .sec{padding:60px 5%;}
+  .hero-btns{flex-direction:column;}
+  .hero-btns .btn{width:100%;}
+  .pgrid{grid-template-columns:1fr;}
+  .wgrid{grid-template-columns:1fr;}
+  .tgrid{grid-template-columns:1fr;}
+  .nav-wrap{padding:0 14px;}
+  .srow{grid-template-columns:1fr 1fr;}
+  .dfeats{grid-template-columns:1fr 1fr;}
+  .avals{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
 <div id="loader">
-  <div class="loader-logo">CREST HOMES</div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="ld-icon">C</div>
+  <div class="ld-name">CREST HOMES</div>
+  <div class="ld-tag">& Properties Ltd</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
-<!-- TOAST -->
-<div id="toast-container"></div>
+<div id="toasts"></div>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobileMenu()">✕</button>
-  <a href="#" onclick="navigate('home');closeMobileMenu()">Home</a>
-  <a href="#" onclick="navigate('properties');closeMobileMenu()">Properties</a>
-  <a href="#" onclick="navigate('about');closeMobileMenu()">About</a>
-  <a href="#" onclick="navigate('contact');closeMobileMenu()">Contact</a>
-  <a href="#" onclick="navigate('admin-login');closeMobileMenu()" style="color:var(--gold)">Admin</a>
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#" onclick="go('home');closeMob()">Home</a>
+  <a href="#" onclick="go('properties');closeMob()">Properties</a>
+  <a href="#" onclick="go('about');closeMob()">About</a>
+  <a href="#" onclick="go('contact');closeMob()">Contact</a>
+  <a href="#" onclick="go('admin-login');closeMob()" style="color:var(--gold)">Admin</a>
 </div>
 
-<!-- NAVBAR -->
 <nav id="navbar">
-  <div class="nav-inner">
-    <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer">
-      <div class="nav-logo-icon">C</div>
-      <div class="nav-logo-text">Crest Homes <span>& Properties Ltd</span></div>
+  <div class="nav-wrap">
+    <div class="nav-logo" onclick="go('home')">
+      <div class="nav-logo-box">C</div>
+      <div class="nav-logo-text"><strong>Crest Homes</strong><span>& Properties Ltd</span></div>
     </div>
     <div class="nav-links">
-      <a href="#" onclick="navigate('home')" id="nav-home" class="active">Home</a>
-      <a href="#" onclick="navigate('properties')" id="nav-properties">Properties</a>
-      <a href="#" onclick="navigate('about')" id="nav-about">About</a>
-      <a href="#" onclick="navigate('contact')" id="nav-contact">Contact</a>
-      <a href="#" onclick="navigate('admin-login')" id="nav-admin" class="nav-cta">Admin</a>
+      <a href="#" onclick="go('home')" id="nl-home" class="act">Home</a>
+      <a href="#" onclick="go('properties')" id="nl-properties">Properties</a>
+      <a href="#" onclick="go('about')" id="nl-about">About</a>
+      <a href="#" onclick="go('contact')" id="nl-contact">Contact</a>
+      <a href="#" onclick="go('admin-login')" id="nl-admin" class="nav-cta">Admin</a>
     </div>
-    <button id="install-app-btn" onclick="installApp()" title="Install App">
-      <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5v-2z"/></svg>
-      Install App
-    </button>
-    <button class="hamburger" onclick="openMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" onclick="openMob()"><i></i><i></i><i></i></button>
   </div>
 </nav>
 
-<!-- ===================== HOME PAGE ===================== -->
+<!-- HOME -->
 <div class="page active" id="page-home">
-
-  <!-- Hero -->
   <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-badge">🏆 Premium Real Estate</div>
-      <h1 class="hero-title" id="hero-title">Find Your <span>Dream Home</span> With Confidence</h1>
-      <p class="hero-sub" id="hero-sub">Crest Homes & Properties Ltd — Your trusted partner for premium real estate in Benin City and beyond. We deliver quality, integrity, and value.</p>
-      <div class="hero-actions">
-        <a href="#" onclick="navigate('properties')" class="btn-gold">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-          View Properties
-        </a>
-        <a href="https://wa.me/2348166958450" target="_blank" class="btn-outline">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          WhatsApp Us
-        </a>
+    <div class="hero-bg"></div><div class="hero-dots"></div><div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-pill"><span class="hero-dot"></span>Premium Real Estate Nigeria</div>
+        <h1 class="hero-h1">Find Your <em>Dream Home</em><br>With Confidence</h1>
+        <p class="hero-p" id="hero-sub">Crest Homes &amp; Properties Ltd — Your trusted partner for premium real estate in Benin City and beyond. We deliver quality, integrity, and lasting value.</p>
+        <div class="hero-btns">
+          <button onclick="go('properties')" class="btn btn-gold">🏠 Browse Properties</button>
+          <a href="https://wa.me/2348166958450" target="_blank" class="btn btn-ghost">💬 WhatsApp Us</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><span class="hstat-n" id="stat-count">0+</span><span class="hstat-l">Properties</span></div>
+          <div class="hstat"><span class="hstat-n">5+</span><span class="hstat-l">Years Active</span></div>
+          <div class="hstat"><span class="hstat-n">100%</span><span class="hstat-l">Satisfaction</span></div>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat-item"><span class="stat-num" id="stat-props">0</span><span class="stat-label">Properties Listed</span></div>
-        <div class="stat-item"><span class="stat-num">5+</span><span class="stat-label">Years Experience</span></div>
-        <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Client Satisfaction</span></div>
+      <div class="hero-right">
+        <div class="hero-cards">
+          <div class="hcard"><div class="hcard-icon">🏡</div><div class="hcard-title">Residential</div><div class="hcard-text">Bungalows, duplexes &amp; family homes</div></div>
+          <div class="hcard"><div class="hcard-icon">🏢</div><div class="hcard-title">Commercial</div><div class="hcard-text">Office spaces &amp; commercial plots</div></div>
+          <div class="hcard span2"><div class="hcard-icon">📍</div><div class="hcard-title">Benin City &amp; Beyond</div><div class="hcard-text">Prime locations across Edo State and Nigeria. Trusted by buyers across the globe.</div></div>
+        </div>
       </div>
     </div>
-    <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
   </section>
 
-  <!-- Promo Banner -->
-  <div class="promo-banner" id="promo-banner">
-    <div class="promo-banner-text">
-      <span>New</span>
-      🏡 Explore our latest premium listings in Benin City — limited plots available. <a href="#" onclick="navigate('properties')" style="color:var(--gold-light);text-decoration:underline;margin-left:4px;">View Properties →</a>
-    </div>
-    <button class="promo-banner-close" onclick="document.getElementById('promo-banner').style.display='none'" title="Dismiss">✕</button>
-  </div>
-
-  <!-- Recently Viewed -->
-  <div class="recently-viewed">
-    <div class="recently-viewed-inner" id="rv-inner">
-      <h4>Recently Viewed</h4>
-      <div class="rv-scroll" id="rv-scroll"></div>
+  <div class="sbar">
+    <div class="sbar-inner">
+      <div class="sbar-item"><div class="sbar-n"><span id="sbar-c">0</span>+</div><div class="sbar-l">Properties Listed</div></div>
+      <div class="sbar-item"><div class="sbar-n">5+</div><div class="sbar-l">Years Experience</div></div>
+      <div class="sbar-item"><div class="sbar-n">100%</div><div class="sbar-l">Client Satisfaction</div></div>
+      <div class="sbar-item"><div class="sbar-n">🌍</div><div class="sbar-l">Global Reach</div></div>
     </div>
   </div>
 
-  <!-- Featured Properties -->
-  <section class="section" id="section-featured">
-    <div class="section-header">
-      <div class="section-tag">Our Portfolio</div>
-      <h2 class="section-title">Featured Properties</h2>
-      <p class="section-sub">Handpicked premium properties across Benin City and beyond.</p>
-      <div class="divider"></div>
-    </div>
-    <div class="properties-grid" id="featured-grid">
-      <div class="no-props"><p>Loading properties...</p></div>
-    </div>
-    <div style="text-align:center;margin-top:48px">
-      <button onclick="navigate('properties')" class="btn-gold">View All Properties</button>
+  <section class="sec">
+    <div class="w">
+      <div class="shead" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:44px;">
+        <div><div class="slbl">Our Portfolio</div><h2 class="stitle">Featured Properties</h2><div class="dbar"></div></div>
+        <button onclick="go('properties')" class="btn btn-outline" style="flex-shrink:0">View All →</button>
+      </div>
+      <div class="pgrid" id="featured-grid"><div class="no-props"><span class="no-props-ic">🏠</span><p>Loading properties...</p></div></div>
     </div>
   </section>
 
-  <!-- Why Choose Us -->
-  <section class="section section-alt">
-    <div class="section-header">
-      <div class="section-tag">Why Us</div>
-      <h2 class="section-title">Why Choose Crest Homes?</h2>
-      <p class="section-sub">We combine expertise, integrity and passion to deliver the finest real estate experience.</p>
-      <div class="divider"></div>
-    </div>
-    <div class="why-grid">
-      <div class="why-card"><div class="why-icon">🏅</div><div class="why-title">Trusted & Verified</div><div class="why-text">All our properties are verified and legally documented. We guarantee transparency in every transaction.</div></div>
-      <div class="why-card"><div class="why-icon">🌍</div><div class="why-title">Global Reach</div><div class="why-text">From Benin City to the world — we connect buyers, sellers, and investors across borders seamlessly.</div></div>
-      <div class="why-card"><div class="why-icon">💎</div><div class="why-title">Premium Quality</div><div class="why-text">Every listed property meets our rigorous quality standards, ensuring value for your investment.</div></div>
-      <div class="why-card"><div class="why-icon">🤝</div><div class="why-title">Dedicated Support</div><div class="why-text">Our team provides end-to-end support — from property search to final documentation and beyond.</div></div>
-      <div class="why-card"><div class="why-icon">📊</div><div class="why-title">Smart Investment</div><div class="why-text">We guide you toward properties with the best ROI, growth potential, and long-term value.</div></div>
-      <div class="why-card"><div class="why-icon">⚡</div><div class="why-title">Fast Transactions</div><div class="why-text">Our streamlined process ensures swift, hassle-free deals without compromising on due diligence.</div></div>
+  <section class="sec" style="background:var(--white);">
+    <div class="w">
+      <div class="shead ctr"><div class="slbl">Why Us</div><h2 class="stitle">Why Choose Crest Homes?</h2><p class="ssub">We combine expertise, integrity and passion to deliver the finest real estate experience.</p><div class="dbar"></div></div>
+      <div class="wgrid">
+        <div class="wcard"><div class="wcard-ic">🏅</div><div class="wcard-title">Trusted &amp; Verified</div><div class="wcard-txt">All properties are legally verified and documented. Total transparency in every transaction.</div></div>
+        <div class="wcard"><div class="wcard-ic">🌍</div><div class="wcard-title">Global Reach</div><div class="wcard-txt">From Benin City to the world — connecting buyers, sellers and investors across all borders.</div></div>
+        <div class="wcard"><div class="wcard-ic">💎</div><div class="wcard-title">Premium Quality</div><div class="wcard-txt">Every property meets our strict quality standards, ensuring excellent value for your investment.</div></div>
+        <div class="wcard"><div class="wcard-ic">🤝</div><div class="wcard-title">Dedicated Support</div><div class="wcard-txt">Full end-to-end support from property search to final documentation and handover.</div></div>
+        <div class="wcard"><div class="wcard-ic">📈</div><div class="wcard-title">Smart Investment</div><div class="wcard-txt">We guide you toward properties with the best ROI, growth potential, and long-term value.</div></div>
+        <div class="wcard"><div class="wcard-ic">⚡</div><div class="wcard-title">Fast Transactions</div><div class="wcard-txt">Streamlined process ensuring swift, hassle-free deals without compromising due diligence.</div></div>
+      </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="section" id="testimonials-section">
-    <div class="section-header">
-      <div class="section-tag">Client Stories</div>
-      <h2 class="section-title">What Our Clients Say</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="testimonials-grid" id="testimonials-grid">
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Crest Homes made buying my first property stress-free. Their team was professional and responsive throughout the entire process."</p><div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Aisha Okonkwo</div><div class="testi-role">Property Buyer, Lagos</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"I sold my property through Crest Homes and got the best market price. I highly recommend them to anyone looking to sell."</p><div class="testi-author"><div class="testi-avatar">E</div><div><div class="testi-name">Emmanuel Osagie</div><div class="testi-role">Property Seller, Benin City</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Outstanding service! The team guided me through everything. I now own my dream home in Benin City. Forever grateful!"</p><div class="testi-author"><div class="testi-avatar">F</div><div><div class="testi-name">Funke Adeyemi</div><div class="testi-role">Homeowner, Benin City</div></div></div></div>
+  <section class="sec">
+    <div class="w">
+      <div class="shead ctr"><div class="slbl">Client Stories</div><h2 class="stitle">What Our Clients Say</h2><div class="dbar"></div></div>
+      <div class="tgrid" id="testi-grid">
+        <div class="tcard"><div class="tstars">★★★★★</div><p class="ttxt">"Crest Homes made buying my first property completely stress-free. Their team was professional and responsive throughout."</p><div class="tauthor"><div class="tav">A</div><div><div class="tname">Aisha Okonkwo</div><div class="trole">Property Buyer, Lagos</div></div></div></div>
+        <div class="tcard"><div class="tstars">★★★★★</div><p class="ttxt">"I sold my property through Crest Homes and got the best market price. Highly recommend to anyone looking to sell."</p><div class="tauthor"><div class="tav">E</div><div><div class="tname">Emmanuel Osagie</div><div class="trole">Property Seller, Benin City</div></div></div></div>
+        <div class="tcard"><div class="tstars">★★★★★</div><p class="ttxt">"Outstanding service! The team guided me through everything. I now own my dream home in Benin City. Forever grateful!"</p><div class="tauthor"><div class="tav">F</div><div><div class="tname">Funke Adeyemi</div><div class="trole">Homeowner, Benin City</div></div></div></div>
+      </div>
     </div>
   </section>
 
-  <!-- About Preview -->
-  <section class="section section-alt">
-    <div class="about-grid">
-      <div class="about-img-wrap">
-        <div style="width:100%;height:400px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-          <div style="text-align:center;color:var(--white);">
-            <div style="font-size:5rem;margin-bottom:16px;">🏠</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);">Crest Homes</div>
-            <div style="font-size:0.9rem;color:rgba(255,255,255,0.6);margin-top:8px;">Building Dreams Since 2019</div>
+  <section class="sec" style="background:var(--white);">
+    <div class="w">
+      <div class="agrid">
+        <div class="avis">
+          <div class="aimg"><div style="text-align:center;color:var(--white);"><div style="font-size:5rem;margin-bottom:14px;">🏠</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--gold);">Crest Homes</div><div style="font-size:.82rem;color:rgba(255,255,255,.45);margin-top:6px;">Building Dreams Since 2019</div></div></div>
+          <div class="abadge"><span class="abadge-n">5+</span><div class="abadge-l">Years</div></div>
+        </div>
+        <div class="acontent">
+          <div class="slbl">About Us</div>
+          <h2 class="stitle">Nigeria's Premier Real Estate Company</h2>
+          <p>Crest Homes &amp; Properties Ltd is a leading real estate company headquartered in Benin City, Edo State, with a global outlook. We specialize in residential and commercial property sales, development, and consultancy.</p>
+          <p>Our mission is to make quality real estate accessible and trustworthy for every Nigerian family and investor — both locally and in the diaspora.</p>
+          <div class="avals">
+            <div class="aval"><div class="aval-dot"></div><div><div class="aval-lbl">Integrity</div><div class="aval-sub">Honest dealings always</div></div></div>
+            <div class="aval"><div class="aval-dot"></div><div><div class="aval-lbl">Excellence</div><div class="aval-sub">Best-in-class properties</div></div></div>
+            <div class="aval"><div class="aval-dot"></div><div><div class="aval-lbl">Innovation</div><div class="aval-sub">Modern real estate solutions</div></div></div>
+            <div class="aval"><div class="aval-dot"></div><div><div class="aval-lbl">Client First</div><div class="aval-sub">Your goals are our goals</div></div></div>
           </div>
-        </div>
-        <div class="about-badge"><span class="about-badge-num">5+</span><div class="about-badge-text">Years of Excellence</div></div>
-      </div>
-      <div class="about-content">
-        <div class="section-tag">About Us</div>
-        <h2>Nigeria's Premier Real Estate Company</h2>
-        <p>Crest Homes & Properties Ltd is a leading real estate company headquartered in Benin City, Edo State, with a global outlook. We specialize in residential and commercial property sales, development, and consultancy.</p>
-        <p>Our mission is to make quality real estate accessible and trustworthy for every Nigerian family and investor, both at home and in the diaspora.</p>
-        <div class="about-vals">
-          <div class="about-val"><div class="val-dot"></div><div class="val-text"><strong>Integrity</strong><span>Honest & transparent dealings</span></div></div>
-          <div class="about-val"><div class="val-dot"></div><div class="val-text"><strong>Excellence</strong><span>Best-in-class properties</span></div></div>
-          <div class="about-val"><div class="val-dot"></div><div class="val-text"><strong>Innovation</strong><span>Modern real estate solutions</span></div></div>
-          <div class="about-val"><div class="val-dot"></div><div class="val-text"><strong>Client First</strong><span>Your satisfaction is our goal</span></div></div>
-        </div>
-        <div style="margin-top:32px">
-          <button onclick="navigate('about')" class="btn-gold">Learn More About Us</button>
+          <div style="margin-top:28px"><button onclick="go('about')" class="btn btn-gold">Learn More →</button></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="section-tag" style="color:var(--gold-light)">Get Started Today</div>
-    <h2 id="cta-text">Ready to Find Your Perfect Property?</h2>
-    <p>Speak with our experts today and take the first step toward owning your dream home.</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="https://wa.me/2348166958450" target="_blank" class="btn-gold">
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        WhatsApp: 08166958450
-      </a>
-      <a href="#" onclick="navigate('contact')" class="btn-outline" style="color:var(--white)">Contact Us</a>
+  <div class="cta">
+    <div class="cta-inner">
+      <div class="slbl" style="justify-content:center;color:var(--gold2)">Get Started Today</div>
+      <h2 id="cta-text">Ready to Find Your Perfect Property?</h2>
+      <p>Speak with our experts and take the first step toward owning your dream home.</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/2348166958450" target="_blank" class="btn btn-gold">💬 WhatsApp: 08166958450</a>
+        <button onclick="go('contact')" class="btn btn-ghost">Contact Us</button>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Footer -->
   <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">Crest <span>Homes</span> & Properties Ltd</div>
-        <p class="footer-desc">Your trusted partner for premium real estate in Benin City and globally. We deliver quality, integrity, and value in every transaction.</p>
-        <div class="footer-socials">
-          <a href="https://wa.me/2348166958450" target="_blank" class="social-btn">📱</a>
-          <a href="mailto:info@cresthomes.com" class="social-btn">✉️</a>
-          <a href="#" class="social-btn">📘</a>
-          <a href="#" class="social-btn">📸</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="#" onclick="navigate('home')">Home</a></li>
-          <li><a href="#" onclick="navigate('properties')">Properties</a></li>
-          <li><a href="#" onclick="navigate('about')">About Us</a></li>
-          <li><a href="#" onclick="navigate('contact')">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Property Types</h4>
-        <ul class="footer-links">
-          <li><a href="#" onclick="navigate('properties')">Residential</a></li>
-          <li><a href="#" onclick="navigate('properties')">Commercial</a></li>
-          <li><a href="#" onclick="navigate('properties')">Land</a></li>
-          <li><a href="#" onclick="navigate('properties')">Off-Plan</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact Info</h4>
-        <ul class="footer-links">
-          <li><a href="tel:+2348166958450">📞 08166958450</a></li>
-          <li><a href="https://wa.me/2348166958450" target="_blank">💬 WhatsApp</a></li>
-          <li><a href="mailto:info@cresthomes.com">✉️ info@cresthomes.com</a></li>
-          <li><a href="#">📍 Benin City, Edo State</a></li>
-        </ul>
-      </div>
+    <div class="fgrid">
+      <div><div class="fbrand">Crest <span>Homes</span></div><p class="fdesc">Trusted partner for premium real estate in Benin City and globally. Quality, integrity and value in every transaction.</p><div class="fsocs"><a href="https://wa.me/2348166958450" target="_blank" class="fsoc">📱</a><a href="mailto:info@cresthomes.com" class="fsoc">✉️</a><a href="#" class="fsoc">📘</a><a href="#" class="fsoc">📸</a></div></div>
+      <div class="fcol"><h4>Quick Links</h4><ul class="flinks"><li><a href="#" onclick="go('home')">Home</a></li><li><a href="#" onclick="go('properties')">Properties</a></li><li><a href="#" onclick="go('about')">About Us</a></li><li><a href="#" onclick="go('contact')">Contact</a></li></ul></div>
+      <div class="fcol"><h4>Property Types</h4><ul class="flinks"><li><a href="#" onclick="go('properties')">Residential</a></li><li><a href="#" onclick="go('properties')">Commercial</a></li><li><a href="#" onclick="go('properties')">Land</a></li><li><a href="#" onclick="go('properties')">Off-Plan</a></li></ul></div>
+      <div class="fcol"><h4>Contact</h4><ul class="flinks"><li><a href="tel:+2348166958450">📞 08166958450</a></li><li><a href="https://wa.me/2348166958450" target="_blank">💬 WhatsApp</a></li><li><a href="mailto:info@cresthomes.com">✉️ info@cresthomes.com</a></li><li><a href="#">📍 Benin City, Edo State</a></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2024 Crest Homes & Properties Ltd. All rights reserved.</p>
-      <p>Benin City, Edo State, Nigeria | <a href="https://wa.me/2348166958450" target="_blank">Contact Us</a></p>
-    </div>
+    <div class="fbot"><p>© 2024 Crest Homes &amp; Properties Ltd. All rights reserved.</p><p>Benin City, Nigeria</p></div>
   </footer>
 </div>
 
-<!-- ===================== PROPERTIES PAGE ===================== -->
+<!-- PROPERTIES -->
 <div class="page" id="page-properties">
-  <div style="padding-top:80px;background:var(--navy);padding-bottom:60px;padding-left:5%;padding-right:5%;">
-    <div class="section-tag" style="color:var(--gold)">Our Portfolio</div>
-    <h1 style="font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:12px;">All Properties</h1>
-    <p style="color:rgba(255,255,255,0.6);max-width:560px;">Browse our complete collection of premium properties available for purchase.</p>
-  </div>
-  <section class="section">
-    <div style="display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;align-items:center;justify-content:space-between">
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button onclick="filterProps('all')" id="filter-all" class="btn-gold" style="padding:10px 20px;font-size:0.85rem;">All</button>
-        <button onclick="filterProps('residential')" id="filter-residential" class="btn-outline" style="padding:10px 20px;font-size:0.85rem;background:var(--white);color:var(--navy);border:1px solid var(--gray-light);">Residential</button>
-        <button onclick="filterProps('commercial')" id="filter-commercial" class="btn-outline" style="padding:10px 20px;font-size:0.85rem;background:var(--white);color:var(--navy);border:1px solid var(--gray-light);">Commercial</button>
-        <button onclick="filterProps('land')" id="filter-land" class="btn-outline" style="padding:10px 20px;font-size:0.85rem;background:var(--white);color:var(--navy);border:1px solid var(--gray-light);">Land</button>
+  <div class="phero"><div class="phero-inner"><div class="slbl">Our Portfolio</div><h1>All Properties</h1><p>Browse our complete collection of premium properties across Benin City and beyond.</p></div></div>
+  <section class="sec">
+    <div class="w">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:28px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="fbtns">
+          <button onclick="filterP('all')" class="btn btn-gold" style="padding:9px 18px;font-size:.84rem;" data-f="all">All</button>
+          <button onclick="filterP('residential')" class="btn btn-outline" style="padding:9px 18px;font-size:.84rem;" data-f="residential">Residential</button>
+          <button onclick="filterP('commercial')" class="btn btn-outline" style="padding:9px 18px;font-size:.84rem;" data-f="commercial">Commercial</button>
+          <button onclick="filterP('land')" class="btn btn-outline" style="padding:9px 18px;font-size:.84rem;" data-f="land">Land</button>
+        </div>
+        <span style="color:var(--gray);font-size:.87rem;"><strong id="pcount" style="color:var(--navy)">0</strong> properties</span>
       </div>
-      <div style="color:var(--gray);font-size:0.9rem"><span id="prop-count">0</span> properties found</div>
-    </div>
-    <div class="properties-grid" id="all-props-grid">
-      <div class="no-props"><p>Loading properties...</p></div>
+      <div class="pgrid" id="all-grid"><div class="no-props"><span class="no-props-ic">🏠</span><p>Loading...</p></div></div>
     </div>
   </section>
-  <footer style="background:var(--black);color:var(--white);padding:40px 5%;text-align:center">
-    <p style="color:rgba(255,255,255,0.35);font-size:0.85rem">© 2024 Crest Homes & Properties Ltd. All rights reserved.</p>
-  </footer>
+  <footer style="background:var(--black);padding:24px 5%;text-align:center;"><p style="color:rgba(255,255,255,.28);font-size:.8rem;">© 2024 Crest Homes &amp; Properties Ltd.</p></footer>
 </div>
 
-<!-- ===================== PROPERTY DETAIL ===================== -->
+<!-- DETAIL -->
 <div class="page" id="page-detail">
-  <div style="padding-top:80px;background:var(--navy);position:relative;">
-    <button class="back-btn" id="back-btn" onclick="goBack()">
-      ← Back to Properties
-    </button>
-    <div class="gallery-main" id="gallery-main">
-      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--white)">Loading...</div>
+  <div class="dtop">
+    <button class="dback" onclick="goBack()">← Back to Properties</button>
+    <div style="position:relative;">
+      <div class="gmain" id="gmain"><div class="gnone">🏠</div></div>
+      <button class="garr prev" id="garr-prev" onclick="gPrev()">‹</button>
+      <button class="garr next" id="garr-next" onclick="gNext()">›</button>
+      <div class="gctr" id="gctr"></div>
     </div>
-    <button class="gallery-arr prev" id="gal-prev" onclick="galleryPrev()">‹</button>
-    <button class="gallery-arr next" id="gal-next" onclick="galleryNext()">›</button>
-    <div class="gallery-nav" id="gallery-dots"></div>
-    <div class="gallery-thumbs" id="gallery-thumbs"></div>
+    <div class="gthumbs" id="gthumbs"></div>
   </div>
-  <div class="detail-body" id="detail-body">
-    <div style="color:var(--gray)">Loading...</div>
-  </div>
-  <footer style="background:var(--black);color:var(--white);padding:40px 5%;text-align:center">
-    <p style="color:rgba(255,255,255,0.35);font-size:0.85rem">© 2024 Crest Homes & Properties Ltd. All rights reserved.</p>
-  </footer>
+  <div class="dbody" id="dbody"><div style="color:var(--gray);padding:40px 0">Loading...</div></div>
+  <footer style="background:var(--black);padding:24px 5%;text-align:center;"><p style="color:rgba(255,255,255,.28);font-size:.8rem;">© 2024 Crest Homes &amp; Properties Ltd.</p></footer>
 </div>
 
-<!-- ===================== ABOUT PAGE ===================== -->
+<!-- ABOUT -->
 <div class="page" id="page-about">
-  <div style="padding-top:80px;background:var(--navy);padding-bottom:80px;padding-left:5%;padding-right:5%;">
-    <div class="section-tag" style="color:var(--gold)">Our Story</div>
-    <h1 style="font-size:clamp(2rem,4vw,3.5rem);color:var(--white);margin-bottom:16px;">About Crest Homes<br>& Properties Ltd</h1>
-    <p style="color:rgba(255,255,255,0.6);max-width:600px;line-height:1.8;">Trusted. Professional. Exceptional. We are Nigeria's premier real estate company with a global vision.</p>
-  </div>
-  <section class="section section-alt">
-    <div class="about-grid">
-      <div class="about-img-wrap">
-        <div style="width:100%;height:450px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden;">
-          <div style="text-align:center;color:var(--white);">
-            <div style="font-size:6rem;">🏢</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);margin-top:16px;">Est. 2019</div>
-          </div>
-        </div>
-        <div class="about-badge"><span class="about-badge-num">5+</span><div class="about-badge-text">Years Strong</div></div>
-      </div>
-      <div class="about-content">
-        <div class="section-tag">Who We Are</div>
-        <h2>Building Legacies, One Property at a Time</h2>
-        <p>Crest Homes & Properties Ltd was founded with a clear vision: to make premium real estate accessible, transparent, and rewarding for every Nigerian. Based in Benin City, Edo State, we serve clients locally and across the globe.</p>
-        <p>Over the years, we have grown to become a trusted name in the real estate industry, known for our integrity, professionalism, and commitment to delivering exceptional value to our clients.</p>
-        <p>Whether you're a first-time buyer, a seasoned investor, or part of the Nigerian diaspora looking to invest back home, Crest Homes is your reliable partner in property.</p>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="section-header">
-      <div class="section-tag">Our Values</div>
-      <h2 class="section-title">What We Stand For</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="why-grid">
-      <div class="why-card"><div class="why-icon">🏛️</div><div class="why-title">Our Mission</div><div class="why-text">To provide accessible, quality, and reliable real estate services that create lasting value for our clients and communities.</div></div>
-      <div class="why-card"><div class="why-icon">🔭</div><div class="why-title">Our Vision</div><div class="why-text">To be Africa's most trusted real estate company, building a future where every family can access quality housing.</div></div>
-      <div class="why-card"><div class="why-icon">💡</div><div class="why-title">Innovation</div><div class="why-text">We embrace technology and modern practices to deliver seamless, fast, and enjoyable real estate experiences.</div></div>
-      <div class="why-card"><div class="why-icon">🤝</div><div class="why-title">Partnership</div><div class="why-text">We build lasting relationships with clients, developers, and communities — because real estate is about people first.</div></div>
-    </div>
-  </section>
-  <section class="cta-section">
-    <h2>Ready to Work With Us?</h2>
-    <p>Join hundreds of satisfied clients who have found their dream properties with Crest Homes.</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="https://wa.me/2348166958450" target="_blank" class="btn-gold">WhatsApp Us Now</a>
-      <button onclick="navigate('properties')" class="btn-outline" style="color:var(--white)">Browse Properties</button>
-    </div>
-  </section>
-  <footer style="background:var(--black);color:var(--white);padding:40px 5%;text-align:center">
-    <p style="color:rgba(255,255,255,0.35);font-size:0.85rem">© 2024 Crest Homes & Properties Ltd. All rights reserved.</p>
-  </footer>
+  <div class="phero"><div class="phero-inner"><div class="slbl">Our Story</div><h1>About Crest Homes<br>&amp; Properties Ltd</h1><p>Trusted. Professional. Exceptional. Nigeria's premier real estate company with a global vision.</p></div></div>
+  <section class="sec" style="background:var(--white);"><div class="w"><div class="agrid">
+    <div class="avis"><div class="aimg"><div style="text-align:center;color:var(--white);"><div style="font-size:5rem;margin-bottom:14px;">🏢</div><div style="font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--gold);">Est. 2019</div></div></div><div class="abadge"><span class="abadge-n">5+</span><div class="abadge-l">Years</div></div></div>
+    <div class="acontent"><div class="slbl">Who We Are</div><h2 class="stitle">Building Legacies,<br>One Property at a Time</h2><p>Crest Homes &amp; Properties Ltd was founded with a clear vision: to make premium real estate accessible, transparent, and rewarding for every Nigerian. Based in Benin City, Edo State, we serve clients locally and across the globe.</p><p>Over the years, we have grown to become a trusted name in the real estate industry, known for our integrity, professionalism, and commitment to delivering exceptional value to our clients.</p><p>Whether you're a first-time buyer, a seasoned investor, or part of the Nigerian diaspora looking to invest back home, Crest Homes is your reliable partner in property.</p></div>
+  </div></div></section>
+  <section class="sec"><div class="w"><div class="shead ctr"><div class="slbl">Our Values</div><h2 class="stitle">What We Stand For</h2><div class="dbar"></div></div><div class="wgrid"><div class="wcard"><div class="wcard-ic">🏛️</div><div class="wcard-title">Our Mission</div><div class="wcard-txt">To provide accessible, quality and reliable real estate services that create lasting value for our clients and communities.</div></div><div class="wcard"><div class="wcard-ic">🔭</div><div class="wcard-title">Our Vision</div><div class="wcard-txt">To be Africa's most trusted real estate company, building a future where every family can access quality housing.</div></div><div class="wcard"><div class="wcard-ic">💡</div><div class="wcard-title">Innovation</div><div class="wcard-txt">We embrace technology and modern practices to deliver seamless, fast and enjoyable real estate experiences.</div></div><div class="wcard"><div class="wcard-ic">🤝</div><div class="wcard-title">Partnership</div><div class="wcard-txt">We build lasting relationships with clients, developers and communities — because real estate is about people first.</div></div></div></div></section>
+  <div class="cta"><div class="cta-inner"><h2>Ready to Work With Us?</h2><p>Join hundreds of satisfied clients who have found their dream properties with Crest Homes.</p><div class="cta-btns"><a href="https://wa.me/2348166958450" target="_blank" class="btn btn-gold">WhatsApp Us Now</a><button onclick="go('properties')" class="btn btn-ghost">Browse Properties</button></div></div></div>
+  <footer style="background:var(--black);padding:24px 5%;text-align:center;"><p style="color:rgba(255,255,255,.28);font-size:.8rem;">© 2024 Crest Homes &amp; Properties Ltd.</p></footer>
 </div>
 
-<!-- ===================== CONTACT PAGE ===================== -->
+<!-- CONTACT -->
 <div class="page" id="page-contact">
-  <div style="padding-top:80px;background:var(--navy);padding-bottom:80px;padding-left:5%;padding-right:5%;">
-    <div class="section-tag" style="color:var(--gold)">Get In Touch</div>
-    <h1 style="font-size:clamp(2rem,4vw,3.5rem);color:var(--white);margin-bottom:12px;">Contact Us</h1>
-    <p style="color:rgba(255,255,255,0.6);max-width:560px">We're here to help. Reach out via WhatsApp, phone, or email.</p>
-  </div>
-  <section class="section">
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h3>Let's Talk</h3>
-        <p>Have questions about a property? Want to schedule a viewing? Our team is available to assist you.</p>
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div><div class="contact-label">Phone</div><div class="contact-value" id="contact-phone">08166958450</div></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">💬</div>
-          <div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/2348166958450" target="_blank" style="color:var(--gold)">Chat on WhatsApp</a></div></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">✉️</div>
-          <div><div class="contact-label">Email</div><div class="contact-value" id="contact-email">info@cresthomes.com</div></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div><div class="contact-label">Location</div><div class="contact-value" id="contact-address">Benin City, Edo State, Nigeria</div></div>
-        </div>
-        <div style="margin-top:32px">
-          <a href="https://wa.me/2348166958450" target="_blank" class="btn-gold btn-full">
-            💬 Open WhatsApp Chat
-          </a>
-        </div>
-      </div>
-      <div class="contact-form">
-        <h3 style="font-size:1.6rem;color:var(--navy);margin-bottom:8px">Send a Message</h3>
-        <p style="color:var(--gray);font-size:0.9rem;margin-bottom:28px">Fill in the form and we'll get back to you within 24 hours.</p>
-        <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" id="cf-fname" placeholder="John"></div>
-          <div class="form-group"><label>Last Name</label><input type="text" id="cf-lname" placeholder="Doe"></div>
-        </div>
-        <div class="form-group"><label>Email Address</label><input type="email" id="cf-email" placeholder="john@example.com"></div>
-        <div class="form-group"><label>Phone Number</label><input type="tel" id="cf-phone" placeholder="08XXXXXXXXX"></div>
-        <div class="form-group"><label>Subject</label><input type="text" id="cf-subject" placeholder="Property Inquiry"></div>
-        <div class="form-group"><label>Message</label><textarea id="cf-message" placeholder="Tell us about your property needs..."></textarea></div>
-        <button onclick="sendContactForm()" class="btn-gold btn-full">Send Message →</button>
-      </div>
+  <div class="phero"><div class="phero-inner"><div class="slbl">Get In Touch</div><h1>Contact Us</h1><p>We're here to help. Reach out via WhatsApp, phone, or the form below.</p></div></div>
+  <section class="sec"><div class="w"><div class="cgrid">
+    <div class="cinfo">
+      <h3>Let's Talk</h3><p>Have questions about a property? Want to schedule a viewing? We're available to assist.</p>
+      <div class="citem"><div class="cic">📞</div><div><div class="cil">Phone</div><div class="civ" id="contact-phone">08166958450</div></div></div>
+      <div class="citem"><div class="cic">💬</div><div><div class="cil">WhatsApp</div><div class="civ"><a href="https://wa.me/2348166958450" target="_blank" style="color:var(--gold2)">Chat on WhatsApp</a></div></div></div>
+      <div class="citem"><div class="cic">✉️</div><div><div class="cil">Email</div><div class="civ" id="contact-email">info@cresthomes.com</div></div></div>
+      <div class="citem"><div class="cic">📍</div><div><div class="cil">Location</div><div class="civ" id="contact-address">Benin City, Edo State, Nigeria</div></div></div>
+      <div style="margin-top:24px"><a href="https://wa.me/2348166958450" target="_blank" class="btn btn-gold" style="width:100%">💬 Open WhatsApp</a></div>
     </div>
-  </section>
-  <footer style="background:var(--black);color:var(--white);padding:40px 5%;text-align:center">
-    <p style="color:rgba(255,255,255,0.35);font-size:0.85rem">© 2024 Crest Homes & Properties Ltd. All rights reserved.</p>
-  </footer>
+    <div class="cform">
+      <h3>Send a Message</h3><p>Fill in the form and we'll get back to you within 24 hours.</p>
+      <div class="frow"><div class="fg"><label>First Name</label><input type="text" id="cf-fn" placeholder="John"></div><div class="fg"><label>Last Name</label><input type="text" id="cf-ln" placeholder="Doe"></div></div>
+      <div class="fg"><label>Email</label><input type="email" id="cf-em" placeholder="john@example.com"></div>
+      <div class="fg"><label>Phone</label><input type="tel" id="cf-ph" placeholder="08XXXXXXXXX"></div>
+      <div class="fg"><label>Subject</label><input type="text" id="cf-su" placeholder="Property Inquiry"></div>
+      <div class="fg"><label>Message</label><textarea id="cf-ms" placeholder="Tell us about your property needs..."></textarea></div>
+      <button onclick="sendContact()" class="btn btn-gold" style="width:100%">Send Message →</button>
+    </div>
+  </div></div></section>
+  <footer style="background:var(--black);padding:24px 5%;text-align:center;"><p style="color:rgba(255,255,255,.28);font-size:.8rem;">© 2024 Crest Homes &amp; Properties Ltd.</p></footer>
 </div>
 
-<!-- ===================== ADMIN LOGIN ===================== -->
+<!-- ADMIN LOGIN -->
 <div class="page" id="page-admin-login">
-  <div id="admin-login">
-    <div class="login-box">
-      <div class="login-logo">
-        <div class="login-logo-icon">C</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy)">Crest Homes</div>
-        <div style="color:var(--gray);font-size:0.8rem;margin-top:4px;">Admin Portal</div>
-      </div>
-      <h2>Welcome Back</h2>
-      <p>Sign in to manage your properties and website content.</p>
-      <div class="form-group"><label>Email Address</label><input type="email" id="admin-email" value="oladepodamilola64@gmail.com" placeholder="admin@cresthomes.com"></div>
-      <div class="form-group"><label>Password</label><input type="password" id="admin-pass" value="123456" placeholder="Enter your password"></div>
-      <button onclick="adminLogin()" class="btn-gold btn-full" style="margin-top:8px">Sign In →</button>
-      <p style="text-align:center;margin-top:20px;font-size:0.85rem;color:var(--gray)"><a href="#" onclick="navigate('home')" style="color:var(--gold)">← Back to Website</a></p>
+  <div style="min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:20px;">
+    <div class="lcard">
+      <div class="lbrand"><div class="lbrand-ic">C</div><h2>Admin Portal</h2><p>Sign in to manage your website</p></div>
+      <div class="fg"><label>Email</label><input type="email" id="adm-em" value="oladepodamilola64@gmail.com"></div>
+      <div class="fg"><label>Password</label><input type="password" id="adm-pw" value="123456" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+      <button onclick="adminLogin()" class="btn btn-gold" style="width:100%;margin-top:8px">Sign In →</button>
+      <p style="text-align:center;margin-top:18px;font-size:.83rem;"><a href="#" onclick="go('home')" style="color:var(--gold)">← Back to Website</a></p>
     </div>
   </div>
 </div>
 
-<!-- ===================== ADMIN PANEL ===================== -->
+<!-- ADMIN PANEL -->
 <div class="page" id="page-admin-panel">
-  <div id="admin-panel">
-    <!-- Sidebar -->
-    <div class="admin-sidebar" id="adminSidebar">
-      <div class="admin-logo">
-        <h3>Crest Homes</h3>
-        <span>Admin Dashboard</span>
-      </div>
-      <nav class="admin-nav">
-        <div class="admin-nav-item active" onclick="showAdminSection('overview')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Overview
-        </div>
-        <div class="admin-nav-item" onclick="showAdminSection('properties')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Properties
-        </div>
-        <div class="admin-nav-item" onclick="showAdminSection('homepage')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Homepage
-        </div>
-        <div class="admin-nav-item" onclick="showAdminSection('contact-settings')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          Contact Settings
-        </div>
-        <div class="admin-nav-item" onclick="showAdminSection('testimonials-admin')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          Testimonials
-        </div>
-        <div class="admin-nav-item" onclick="showAdminSection('settings')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M20 12h2M2 12h2M12 20v2M12 2v2"/></svg>
-          Settings
-        </div>
-        <div class="admin-nav-item" onclick="navigate('home')" style="margin-top:auto;border-top:1px solid rgba(255,255,255,0.07);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
-          View Website
-        </div>
-        <div class="admin-nav-item" onclick="adminLogout()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-          Logout
-        </div>
-      </nav>
+  <div class="aside" id="aside">
+    <div class="aside-brand"><h3>Crest Homes</h3><span>Admin Dashboard</span></div>
+    <nav class="anav">
+      <div class="anav-item act" onclick="asec('overview')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Overview</div>
+      <div class="anav-item" onclick="asec('properties')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Properties</div>
+      <div class="anav-item" onclick="asec('homepage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Homepage</div>
+      <div class="anav-item" onclick="asec('contact-set')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>Contact</div>
+      <div class="anav-item" onclick="asec('testimonials')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Testimonials</div>
+      <div class="anav-item" onclick="asec('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M20 12h2M2 12h2M12 20v2M12 2v2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>Settings</div>
+      <div class="anav-sep"></div>
+      <div class="anav-item" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View Website</div>
+      <div class="anav-item" onclick="adminLogout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout</div>
+    </nav>
+  </div>
+  <div class="amain">
+    <div class="atopbar"><div><h2 id="atitle">Dashboard Overview</h2><p>Welcome back, Admin!</p></div><button onclick="openAddP()" class="sbtn">+ Add Property</button></div>
+    <div class="asec act" id="asec-overview">
+      <div class="srow"><div class="sbox"><div class="sbox-n" id="st-tot">0</div><div class="sbox-l">Total Properties</div></div><div class="sbox"><div class="sbox-n" id="st-act">0</div><div class="sbox-l">Active</div></div><div class="sbox"><div class="sbox-n" id="st-hid">0</div><div class="sbox-l">Hidden</div></div><div class="sbox"><div class="sbox-n" id="st-ft">0</div><div class="sbox-l">Featured</div></div></div>
+      <div class="acard"><div class="acard-t">Recent Properties</div><div id="recent-t">Loading...</div></div>
     </div>
-
-    <!-- Main Content -->
-    <div class="admin-main">
-      <div class="admin-topbar">
-        <div>
-          <h2 id="admin-section-title">Dashboard Overview</h2>
-          <p style="color:var(--gray);font-size:0.85rem;margin-top:4px">Welcome back, Admin!</p>
-        </div>
-        <button onclick="openAddPropertyModal()" class="btn-gold" style="padding:10px 20px;font-size:0.9rem;">+ Add Property</button>
+    <div class="asec" id="asec-properties">
+      <div class="acard"><div class="acard-t">All Properties <button onclick="openAddP()" class="sbtn" style="font-size:.76rem;padding:7px 13px">+ Add New</button></div><div style="overflow-x:auto"><table class="atable"><thead><tr><th>Property</th><th>Price</th><th>Location</th><th>Status</th><th>Visibility</th><th>Actions</th></tr></thead><tbody id="ptbody"></tbody></table></div></div>
+    </div>
+    <div class="asec" id="asec-homepage">
+      <div class="acard"><div class="acard-t">Hero Section</div>
+        <div class="fg"><label>Hero Subtitle</label><textarea id="sh-sub" style="height:80px" placeholder="Your trusted partner for premium real estate..."></textarea></div>
+        <div class="fg"><label>CTA Heading</label><input type="text" id="sh-cta" placeholder="Ready to Find Your Perfect Property?"></div>
+        <button onclick="saveHp()" class="sbtn" style="padding:10px 22px">Save Changes</button>
       </div>
-
-      <!-- Overview -->
-      <div class="admin-section active" id="admin-overview">
-        <div class="stats-grid">
-          <div class="stat-card"><div class="stat-card-num" id="stats-total">0</div><div class="stat-card-label">Total Properties</div></div>
-          <div class="stat-card"><div class="stat-card-num" id="stats-active">0</div><div class="stat-card-label">Active Listings</div></div>
-          <div class="stat-card"><div class="stat-card-num" id="stats-hidden">0</div><div class="stat-card-label">Hidden Listings</div></div>
-          <div class="stat-card"><div class="stat-card-num" id="stats-featured">0</div><div class="stat-card-label">Featured</div></div>
-        </div>
-        <div class="card">
-          <h3>Recent Properties</h3>
-          <div id="recent-props-table">Loading...</div>
-        </div>
+    </div>
+    <div class="asec" id="asec-contact-set">
+      <div class="acard"><div class="acard-t">Contact Information</div>
+        <div class="frow"><div class="fg"><label>Phone Number</label><input type="text" id="sc-ph" placeholder="08166958450"></div><div class="fg"><label>WhatsApp (with country code)</label><input type="text" id="sc-wa" placeholder="2348166958450"></div></div>
+        <div class="frow"><div class="fg"><label>Email</label><input type="email" id="sc-em" placeholder="info@cresthomes.com"></div><div class="fg"><label>Office Address</label><input type="text" id="sc-ad" placeholder="Benin City, Edo State, Nigeria"></div></div>
+        <button onclick="saveCs()" class="sbtn" style="padding:10px 22px">Save Changes</button>
       </div>
-
-      <!-- Properties -->
-      <div class="admin-section" id="admin-properties">
-        <div class="card">
-          <h3>All Properties <button onclick="openAddPropertyModal()" class="btn-gold" style="float:right;padding:8px 16px;font-size:0.82rem;">+ Add New</button></h3>
-          <div style="overflow-x:auto">
-            <table class="admin-table" id="props-admin-table">
-              <thead><tr><th>Property</th><th>Price</th><th>Location</th><th>Status</th><th>Visibility</th><th>Actions</th></tr></thead>
-              <tbody id="props-admin-tbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Homepage -->
-      <div class="admin-section" id="admin-homepage">
-        <div class="card">
-          <h3>Hero Section</h3>
-          <div class="form-group"><label>Hero Title</label><input type="text" id="set-hero-title" placeholder="Find Your Dream Home With Confidence"></div>
-          <div class="form-group"><label>Hero Subtitle</label><textarea id="set-hero-sub" placeholder="Your trusted partner for premium real estate..."></textarea></div>
-          <div class="form-group"><label>CTA Button Text</label><input type="text" id="set-cta-text" placeholder="Ready to Find Your Perfect Property?"></div>
-          <button onclick="saveHomepageSettings()" class="btn-gold" style="padding:12px 28px">Save Changes</button>
-        </div>
-      </div>
-
-      <!-- Contact Settings -->
-      <div class="admin-section" id="admin-contact-settings">
-        <div class="card">
-          <h3>Contact Information</h3>
-          <div class="form-group"><label>Phone Number</label><input type="text" id="set-phone" placeholder="08166958450"></div>
-          <div class="form-group"><label>WhatsApp Number (with country code)</label><input type="text" id="set-whatsapp" placeholder="2348166958450"></div>
-          <div class="form-group"><label>Email Address</label><input type="email" id="set-email" placeholder="info@cresthomes.com"></div>
-          <div class="form-group"><label>Office Address</label><input type="text" id="set-address" placeholder="Benin City, Edo State, Nigeria"></div>
-          <button onclick="saveContactSettings()" class="btn-gold" style="padding:12px 28px">Save Changes</button>
-        </div>
-      </div>
-
-      <!-- Testimonials Admin -->
-      <div class="admin-section" id="admin-testimonials-admin">
-        <div class="card">
-          <h3>Manage Testimonials <button onclick="openAddTestiModal()" class="btn-gold" style="float:right;padding:8px 16px;font-size:0.82rem;">+ Add New</button></h3>
-          <div style="overflow-x:auto">
-            <table class="admin-table">
-              <thead><tr><th>Name</th><th>Role</th><th>Review</th><th>Actions</th></tr></thead>
-              <tbody id="testi-admin-tbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Settings -->
-      <div class="admin-section" id="admin-settings">
-        <div class="card">
-          <h3>Change Password</h3>
-          <div class="form-group"><label>Current Password</label><input type="password" id="set-curr-pass" placeholder="Current password"></div>
-          <div class="form-group"><label>New Password</label><input type="password" id="set-new-pass" placeholder="New password"></div>
-          <div class="form-group"><label>Confirm New Password</label><input type="password" id="set-confirm-pass" placeholder="Confirm new password"></div>
-          <button onclick="changePassword()" class="btn-gold" style="padding:12px 28px">Update Password</button>
-        </div>
+    </div>
+    <div class="asec" id="asec-testimonials">
+      <div class="acard"><div class="acard-t">Testimonials <button onclick="openAddT()" class="sbtn" style="font-size:.76rem;padding:7px 13px">+ Add New</button></div><div style="overflow-x:auto"><table class="atable"><thead><tr><th>Name</th><th>Role</th><th>Review</th><th>Actions</th></tr></thead><tbody id="ttbody"></tbody></table></div></div>
+    </div>
+    <div class="asec" id="asec-settings">
+      <div class="acard"><div class="acard-t">Change Password</div>
+        <div class="fg"><label>Current Password</label><input type="password" id="sp-c" placeholder="Current password"></div>
+        <div class="fg"><label>New Password</label><input type="password" id="sp-n" placeholder="New password"></div>
+        <div class="fg"><label>Confirm New Password</label><input type="password" id="sp-cf" placeholder="Confirm password"></div>
+        <button onclick="changePass()" class="sbtn" style="padding:10px 22px">Update Password</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===================== MODALS ===================== -->
-
-<!-- Add/Edit Property Modal -->
-<div class="modal-overlay" id="propertyModal">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 id="modal-prop-title">Add New Property</h3>
-      <button class="modal-close" onclick="closeModal('propertyModal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="edit-prop-id">
-      <div class="form-row">
-        <div class="form-group"><label>Property Title *</label><input type="text" id="prop-title" placeholder="4 Bedroom Bungalow"></div>
-        <div class="form-group"><label>Property Type</label>
-          <select id="prop-type"><option value="residential">Residential</option><option value="commercial">Commercial</option><option value="land">Land</option></select>
-        </div>
+<!-- PROPERTY MODAL -->
+<div class="mbg" id="propModal">
+  <div class="mbox">
+    <div class="mhead"><h3 id="pmt">Add Property</h3><button class="mclose" onclick="closeM('propModal')">✕</button></div>
+    <div class="mbody">
+      <input type="hidden" id="ep-id">
+      <div class="frow"><div class="fg"><label>Title *</label><input type="text" id="ep-ti" placeholder="4 Bedroom Bungalow"></div><div class="fg"><label>Type</label><select id="ep-ty"><option value="residential">Residential</option><option value="commercial">Commercial</option><option value="land">Land</option></select></div></div>
+      <div class="frow"><div class="fg"><label>Price (₦) *</label><input type="text" id="ep-pr" placeholder="45,000,000"></div><div class="fg"><label>Status</label><select id="ep-st"><option value="available">Available</option><option value="sold">Sold</option><option value="off-plan">Off-Plan</option></select></div></div>
+      <div class="fg"><label>Location *</label><input type="text" id="ep-lo" placeholder="Obagienevbosa, off Sapele/Airport Road, Benin City"></div>
+      <div class="frow"><div class="fg"><label>Land Size</label><input type="text" id="ep-ls" placeholder="100ft x 100ft"></div><div class="fg"><label>Bedrooms</label><input type="number" id="ep-bd" placeholder="4" min="0"></div></div>
+      <div class="frow"><div class="fg"><label>Bathrooms</label><input type="number" id="ep-bt" placeholder="3" min="0"></div><div class="fg"><label>Completion %</label><input type="number" id="ep-co" placeholder="90" min="0" max="100"></div></div>
+      <div class="fg"><label>Description</label><textarea id="ep-de" style="height:85px" placeholder="Describe the property..."></textarea></div>
+      <div class="fg"><label>Features (comma separated)</label><input type="text" id="ep-fe" placeholder="Pool, Parking, Security, CCTV"></div>
+      <div class="frow"><div class="fg"><label>Featured on Homepage</label><select id="ep-ft"><option value="no">No</option><option value="yes">Yes</option></select></div><div class="fg"><label>Visibility</label><select id="ep-vi"><option value="yes">Visible</option><option value="no">Hidden</option></select></div></div>
+      <div class="fg">
+        <label>Property Images <span style="color:var(--gray);font-weight:400;font-size:.77rem">(paste image URLs — one per line)</span></label>
+        <div id="img-list"></div>
+        <button type="button" class="add-url" onclick="addImgRow()">+ Add Image URL</button>
+        <button type="button" class="prev-btn" onclick="prevImgs()">👁 Preview Images</button>
+        <div class="prev-grid" id="img-prev"></div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label>Price (₦) *</label><input type="text" id="prop-price" placeholder="45,000,000"></div>
-        <div class="form-group"><label>Status</label>
-          <select id="prop-status"><option value="available">Available</option><option value="sold">Sold</option><option value="off-plan">Off-Plan</option></select>
-        </div>
-      </div>
-      <div class="form-group"><label>Location *</label><input type="text" id="prop-location" placeholder="Obagienevbosa, off Sapele/Airport Road, Benin City"></div>
-      <div class="form-row">
-        <div class="form-group"><label>Land Size</label><input type="text" id="prop-land" placeholder="100ft x 100ft"></div>
-        <div class="form-group"><label>Bedrooms</label><input type="number" id="prop-beds" placeholder="4" min="0"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Bathrooms</label><input type="number" id="prop-baths" placeholder="3" min="0"></div>
-        <div class="form-group"><label>Completion %</label><input type="number" id="prop-completion" placeholder="90" min="0" max="100"></div>
-      </div>
-      <div class="form-group"><label>Description</label><textarea id="prop-desc" placeholder="Describe the property in detail..." style="height:100px"></textarea></div>
-      <div class="form-group"><label>Features (comma separated)</label><input type="text" id="prop-feats" placeholder="Swimming Pool, Parking, Security, CCTV"></div>
-      <div class="form-row">
-        <div class="form-group"><label>Featured</label>
-          <select id="prop-featured"><option value="no">No</option><option value="yes">Yes - Show on Homepage</option></select>
-        </div>
-        <div class="form-group"><label>Visibility</label>
-          <select id="prop-visible"><option value="yes">Visible (Public)</option><option value="no">Hidden</option></select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Upload Images & Videos</label>
-        <div class="upload-area" onclick="document.getElementById('media-input').click()">
-          <div style="font-size:2rem;margin-bottom:8px">📷</div>
-          <div style="font-size:0.9rem;color:var(--navy);font-weight:500">Click to upload images & videos</div>
-          <div style="font-size:0.8rem;color:var(--gray);margin-top:4px">JPG, PNG, MP4, MOV supported. Max 20 files.</div>
-          <input type="file" id="media-input" multiple accept="image/*,video/*" onchange="handleMediaUpload(event)">
-        </div>
-        <div class="media-preview-grid" id="media-preview"></div>
+      <div class="fg">
+        <label>Video Walkthrough URL <span style="color:var(--gray);font-weight:400;font-size:.77rem">(YouTube or direct .mp4 link)</span></label>
+        <input type="text" id="ep-vid" placeholder="https://youtube.com/watch?v=... or https://example.com/video.mp4">
+        <button type="button" class="prev-btn" onclick="prevVid()" style="margin-top:5px">👁 Preview Video</button>
+        <div id="vid-prev" style="margin-top:10px"></div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button onclick="closeModal('propertyModal')" style="padding:10px 20px;border-radius:8px;border:1px solid var(--gray-light);background:var(--white);color:var(--gray);cursor:pointer">Cancel</button>
-      <button onclick="saveProperty()" class="btn-gold" style="padding:10px 24px">Save Property</button>
-    </div>
+    <div class="mfoot"><button class="mcancel" onclick="closeM('propModal')">Cancel</button><button onclick="saveP()" class="sbtn" style="padding:9px 22px">Save Property</button></div>
   </div>
 </div>
 
-<!-- Testimonial Modal -->
-<div class="modal-overlay" id="testiModal">
-  <div class="modal" style="max-width:480px">
-    <div class="modal-header"><h3>Add Testimonial</h3><button class="modal-close" onclick="closeModal('testiModal')">✕</button></div>
-    <div class="modal-body">
-      <div class="form-group"><label>Client Name</label><input type="text" id="testi-name" placeholder="John Doe"></div>
-      <div class="form-group"><label>Role / Location</label><input type="text" id="testi-role" placeholder="Property Buyer, Lagos"></div>
-      <div class="form-group"><label>Review</label><textarea id="testi-text" placeholder="Write the client's testimonial..." style="height:110px"></textarea></div>
-      <div class="form-group"><label>Rating (stars)</label>
-        <select id="testi-stars"><option value="5">★★★★★ (5)</option><option value="4">★★★★ (4)</option><option value="3">★★★ (3)</option></select>
-      </div>
+<!-- TESTI MODAL -->
+<div class="mbg" id="testiModal">
+  <div class="mbox" style="max-width:460px">
+    <div class="mhead"><h3>Add Testimonial</h3><button class="mclose" onclick="closeM('testiModal')">✕</button></div>
+    <div class="mbody">
+      <div class="fg"><label>Client Name</label><input type="text" id="t-nm" placeholder="John Doe"></div>
+      <div class="fg"><label>Role / Location</label><input type="text" id="t-ro" placeholder="Property Buyer, Lagos"></div>
+      <div class="fg"><label>Review</label><textarea id="t-tx" style="height:100px" placeholder="Client testimonial..."></textarea></div>
+      <div class="fg"><label>Rating</label><select id="t-st"><option value="5">★★★★★ (5)</option><option value="4">★★★★ (4)</option><option value="3">★★★ (3)</option></select></div>
     </div>
-    <div class="modal-footer">
-      <button onclick="closeModal('testiModal')" style="padding:10px 20px;border-radius:8px;border:1px solid var(--gray-light);background:var(--white);color:var(--gray);cursor:pointer">Cancel</button>
-      <button onclick="saveTestimonial()" class="btn-gold" style="padding:10px 24px">Save</button>
-    </div>
+    <div class="mfoot"><button class="mcancel" onclick="closeM('testiModal')">Cancel</button><button onclick="saveT()" class="sbtn" style="padding:9px 22px">Save</button></div>
   </div>
 </div>
 
-<!-- Image Fullscreen -->
-<div class="img-overlay" id="imgOverlay" onclick="closeImgOverlay()">
-  <button class="img-overlay-close">✕</button>
-  <img id="overlay-img" src="" alt="">
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLB()">
+  <button class="lb-close">✕</button>
+  <img id="lb-img" src="" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;">
 </div>
 
-<!-- Firebase + App JS -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot, getDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, getDoc, setDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCbsOlOJznmhsRXuueVNpdriLbBZyKHowU",
-  authDomain: "crest-homes-properties-ltd.firebaseapp.com",
-  projectId: "crest-homes-properties-ltd",
-  storageBucket: "crest-homes-properties-ltd.firebasestorage.app",
-  messagingSenderId: "378788136869",
-  appId: "1:378788136869:web:441ccdf48045c1928b8a4c"
-};
-
-const app = initializeApp(firebaseConfig);
+const app = initializeApp({
+  apiKey:"AIzaSyCbsOlOJznmhsRXuueVNpdriLbBZyKHowU",
+  authDomain:"crest-homes-properties-ltd.firebaseapp.com",
+  projectId:"crest-homes-properties-ltd",
+  storageBucket:"crest-homes-properties-ltd.firebasestorage.app",
+  messagingSenderId:"378788136869",
+  appId:"1:378788136869:web:441ccdf48045c1928b8a4c"
+});
 const db = getFirestore(app);
-const storage = getStorage(app);
 const auth = getAuth(app);
 
-// ===== STATE =====
-let allProperties = [];
-let currentGallery = [];
-let currentGalleryIdx = 0;
-let currentDetailProp = null;
-let previousPage = 'home';
-let pendingMedia = []; // {file, url, type}
-let editingPropId = null;
-let existingMedia = []; // already uploaded media URLs
-let adminSettings = {};
-let allTestimonials = [];
+let allP=[], allT=[], cfg={}, galI=[], galX=0, prevPg='home', curF='all', editId=null;
 
-// ===== INIT =====
+// ── INIT ──
 window.addEventListener('load', async () => {
-  setTimeout(() => {
-    document.getElementById('loader').style.opacity = '0';
-    setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 400);
-  }, 1600);
+  setTimeout(()=>{ const l=document.getElementById('loader'); l.classList.add('hide'); setTimeout(()=>l.style.display='none',550); }, 1800);
+  window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>40));
 
-  // Navbar scroll
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  await loadCfg();
+  onSnapshot(query(collection(db,'properties'),orderBy('createdAt','desc')), s=>{
+    allP = s.docs.map(d=>({id:d.id,...d.data()}));
+    rFeatured(); rAll(); rATable(); rStats(); rStatCount();
   });
-
-  // Load settings
-  await loadSettings();
-
-  // Live listener for properties
-  const q = query(collection(db, 'properties'), orderBy('createdAt', 'desc'));
-  onSnapshot(q, (snap) => {
-    allProperties = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderFeaturedProps();
-    renderAllProps();
-    renderAdminPropsTable();
-    renderOverviewStats();
-    updateHeroStats();
+  onSnapshot(collection(db,'testimonials'), s=>{
+    allT = s.docs.map(d=>({id:d.id,...d.data()}));
+    rTestis(); rTestisAdm();
   });
-
-  // Auth listener
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      if (document.getElementById('page-admin-login').classList.contains('active')) {
-        navigate('admin-panel');
-      }
-    }
-  });
-
-  loadTestimonialsListener();
-  loadSettingsListener();
+  onSnapshot(doc(db,'settings','main'), s=>{ if(s.exists()){ cfg=s.data(); applyCfg(); } });
+  onAuthStateChanged(auth, u=>{ if(u&&document.getElementById('page-admin-login').classList.contains('active')) go('admin-panel'); });
+  addImgRow();
 });
 
-// ===== NAVIGATION =====
-window.navigate = function(page) {
-  const pages = ['home','properties','about','contact','admin-login','admin-panel','detail'];
-  pages.forEach(p => {
-    const el = document.getElementById('page-'+p);
-    if (el) el.classList.remove('active');
-  });
-  const target = document.getElementById('page-'+page);
-  if (target) target.classList.add('active');
+// ── NAV ──
+window.go = function(pg){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('page-'+pg); if(el) el.classList.add('active');
   window.scrollTo(0,0);
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('act'));
+  const nl=document.getElementById('nl-'+pg); if(nl) nl.classList.add('act');
+  if(pg==='admin-panel'){ if(!auth.currentUser){go('admin-login');return;} asec('overview'); rATable(); rStats(); loadAdmCfg(); rTestisAdm(); }
+  if(pg!=='detail') prevPg=pg;
+};
+window.goBack = ()=>go(prevPg||'properties');
+window.openMob = ()=>document.getElementById('mobNav').classList.add('open');
+window.closeMob = ()=>document.getElementById('mobNav').classList.remove('open');
 
-  // Nav highlighting
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-  const navEl = document.getElementById('nav-'+page);
-  if (navEl) navEl.classList.add('active');
-
-  // Check admin auth
-  if (page === 'admin-panel') {
-    if (!auth.currentUser) { navigate('admin-login'); return; }
-    showAdminSection('overview');
-    renderAdminPropsTable();
-    renderOverviewStats();
-    loadAdminSettings();
-    loadTestimonialsAdmin();
-  }
-
-  if (page !== 'detail') previousPage = page;
+// ── TOAST ──
+window.toast = function(msg,t='ok'){
+  const w=document.getElementById('toasts'), d=document.createElement('div');
+  d.className=`toast ${t}`; d.innerHTML=`<span>${t==='ok'?'✓':'✗'}</span> ${msg}`;
+  w.appendChild(d); setTimeout(()=>d.remove(),3200);
 };
 
-window.goBack = function() {
-  navigate(previousPage || 'properties');
+// ── MODAL ──
+window.openM = id=>document.getElementById(id).classList.add('open');
+window.closeM = id=>document.getElementById(id).classList.remove('open');
+
+// ── LIGHTBOX ──
+window.openLB = url=>{ document.getElementById('lb-img').src=url; document.getElementById('lightbox').classList.add('show'); };
+window.closeLB = ()=>document.getElementById('lightbox').classList.remove('show');
+
+// ── CONFIG ──
+async function loadCfg(){ try{ const s=await getDoc(doc(db,'settings','main')); if(s.exists()){cfg=s.data();applyCfg();} }catch(e){} }
+function applyCfg(){
+  const m={ 'hero-sub':'heroSub', 'cta-text':'ctaText', 'contact-phone':'phone', 'contact-email':'email', 'contact-address':'address' };
+  Object.entries(m).forEach(([id,k])=>{ if(cfg[k]){const e=document.getElementById(id);if(e)e.textContent=cfg[k];} });
+}
+function loadAdmCfg(){
+  document.getElementById('sh-sub').value=cfg.heroSub||'';
+  document.getElementById('sh-cta').value=cfg.ctaText||'';
+  document.getElementById('sc-ph').value=cfg.phone||'';
+  document.getElementById('sc-wa').value=cfg.whatsapp||'';
+  document.getElementById('sc-em').value=cfg.email||'';
+  document.getElementById('sc-ad').value=cfg.address||'';
+}
+window.saveHp = async()=>{ await setDoc(doc(db,'settings','main'),{heroSub:document.getElementById('sh-sub').value,ctaText:document.getElementById('sh-cta').value},{merge:true}); toast('Saved!'); };
+window.saveCs = async()=>{ await setDoc(doc(db,'settings','main'),{phone:document.getElementById('sc-ph').value,whatsapp:document.getElementById('sc-wa').value,email:document.getElementById('sc-em').value,address:document.getElementById('sc-ad').value},{merge:true}); toast('Saved!'); };
+
+// ── AUTH ──
+window.adminLogin = async()=>{ try{ await signInWithEmailAndPassword(auth,document.getElementById('adm-em').value.trim(),document.getElementById('adm-pw').value); toast('Welcome back!'); go('admin-panel'); }catch(e){ toast('Invalid credentials','err'); } };
+window.adminLogout = async()=>{ await signOut(auth); toast('Logged out'); go('home'); };
+window.changePass = async()=>{
+  const c=document.getElementById('sp-c').value, n=document.getElementById('sp-n').value, cf=document.getElementById('sp-cf').value;
+  if(!c||!n||!cf){toast('Fill all fields','err');return;} if(n!==cf){toast('Passwords do not match','err');return;}
+  try{ const u=auth.currentUser; await reauthenticateWithCredential(u,EmailAuthProvider.credential(u.email,c)); await updatePassword(u,n); toast('Password updated!'); ['sp-c','sp-n','sp-cf'].forEach(id=>document.getElementById(id).value=''); }
+  catch(e){ toast('Error: '+(e.code==='auth/wrong-password'?'Wrong current password':e.message),'err'); }
 };
 
-// ===== TOAST =====
-window.showToast = function(msg, type='success') {
-  const t = document.getElementById('toast-container');
-  const d = document.createElement('div');
-  d.className = `toast ${type}`;
-  d.innerHTML = `<span>${type==='success'?'✓':'✗'}</span> ${msg}`;
-  t.appendChild(d);
-  setTimeout(() => d.remove(), 3100);
+// ── ADMIN SECTIONS ──
+window.asec = function(n){
+  document.querySelectorAll('.asec').forEach(s=>s.classList.remove('act'));
+  document.querySelectorAll('.anav-item').forEach(i=>i.classList.remove('act'));
+  const el=document.getElementById('asec-'+n); if(el) el.classList.add('act');
+  const titles={overview:'Dashboard Overview',properties:'Manage Properties',homepage:'Homepage Settings','contact-set':'Contact Settings',testimonials:'Testimonials',settings:'Account Settings'};
+  document.getElementById('atitle').textContent=titles[n]||'Admin';
+  document.querySelectorAll('.anav-item').forEach(i=>{ if(i.getAttribute('onclick')?.includes(`'${n}'`)) i.classList.add('act'); });
 };
 
-// ===== MOBILE MENU =====
-window.openMobileMenu = () => document.getElementById('mobileMenu').classList.add('open');
-window.closeMobileMenu = () => document.getElementById('mobileMenu').classList.remove('open');
-
-// ===== MODAL =====
-window.openModal = (id) => document.getElementById(id).classList.add('open');
-window.closeModal = (id) => { document.getElementById(id).classList.remove('open'); };
-
-// ===== LOAD SETTINGS =====
-async function loadSettings() {
-  try {
-    const docSnap = await getDoc(doc(db,'settings','main'));
-    if (docSnap.exists()) {
-      adminSettings = docSnap.data();
-      applySettings(adminSettings);
-    }
-  } catch(e){}
+// ── HELPERS ──
+function fmtP(p){ const n=parseInt(String(p||0).replace(/\D/g,'')); return isNaN(n)?(p||'0'):n.toLocaleString('en-NG'); }
+function getWA(){ return cfg.whatsapp||'2348166958450'; }
+function videoEmbed(url){
+  if(!url) return '';
+  const yt=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if(yt) return `<iframe src="https://www.youtube.com/embed/${yt[1]}?rel=0" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>`;
+  if(/\.(mp4|webm|ogg)/i.test(url)) return `<video src="${url}" controls style="width:100%;height:100%;"></video>`;
+  return `<iframe src="${url}" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>`;
 }
 
-function loadSettingsListener() {
-  onSnapshot(doc(db,'settings','main'), (snap) => {
-    if (snap.exists()) {
-      adminSettings = snap.data();
-      applySettings(adminSettings);
-    }
-  });
-}
-
-function applySettings(s) {
-  if (s.heroTitle) { document.getElementById('hero-title').innerHTML = s.heroTitle.replace(/dream home/i, '<span>Dream Home</span>'); }
-  if (s.heroSub) document.getElementById('hero-sub').textContent = s.heroSub;
-  if (s.ctaText) document.getElementById('cta-text').textContent = s.ctaText;
-  if (s.phone) { const el = document.getElementById('contact-phone'); if(el) el.textContent = s.phone; }
-  if (s.email) { const el = document.getElementById('contact-email'); if(el) el.textContent = s.email; }
-  if (s.address) { const el = document.getElementById('contact-address'); if(el) el.textContent = s.address; }
-}
-
-function loadAdminSettings() {
-  if (adminSettings.heroTitle) document.getElementById('set-hero-title').value = adminSettings.heroTitle;
-  if (adminSettings.heroSub) document.getElementById('set-hero-sub').value = adminSettings.heroSub;
-  if (adminSettings.ctaText) document.getElementById('set-cta-text').value = adminSettings.ctaText;
-  if (adminSettings.phone) document.getElementById('set-phone').value = adminSettings.phone;
-  if (adminSettings.whatsapp) document.getElementById('set-whatsapp').value = adminSettings.whatsapp;
-  if (adminSettings.email) document.getElementById('set-email').value = adminSettings.email;
-  if (adminSettings.address) document.getElementById('set-address').value = adminSettings.address;
-}
-
-// ===== HOMEPAGE SETTINGS =====
-window.saveHomepageSettings = async function() {
-  const data = {
-    heroTitle: document.getElementById('set-hero-title').value || 'Find Your Dream Home With Confidence',
-    heroSub: document.getElementById('set-hero-sub').value || '',
-    ctaText: document.getElementById('set-cta-text').value || ''
-  };
-  try {
-    await updateDoc(doc(db,'settings','main'), data);
-    showToast('Homepage settings saved!');
-  } catch(e) {
-    // Create if doesn't exist
-    try {
-      const { setDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-      await setDoc(doc(db,'settings','main'), data, {merge:true});
-      showToast('Homepage settings saved!');
-    } catch(e2){ showToast('Error saving: '+e2.message,'error'); }
-  }
-};
-
-// ===== CONTACT SETTINGS =====
-window.saveContactSettings = async function() {
-  const data = {
-    phone: document.getElementById('set-phone').value,
-    whatsapp: document.getElementById('set-whatsapp').value,
-    email: document.getElementById('set-email').value,
-    address: document.getElementById('set-address').value
-  };
-  try {
-    const { setDoc } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-    await setDoc(doc(db,'settings','main'), data, {merge:true});
-    showToast('Contact settings saved!');
-  } catch(e){ showToast('Error: '+e.message,'error'); }
-};
-
-// ===== ADMIN AUTH =====
-window.adminLogin = async function() {
-  const email = document.getElementById('admin-email').value.trim();
-  const pass = document.getElementById('admin-pass').value;
-  try {
-    await signInWithEmailAndPassword(auth, email, pass);
-    showToast('Welcome back, Admin!');
-    navigate('admin-panel');
-  } catch(e) {
-    showToast('Invalid credentials. Please try again.','error');
-  }
-};
-
-window.adminLogout = async function() {
-  await signOut(auth);
-  showToast('Logged out successfully');
-  navigate('home');
-};
-
-window.changePassword = async function() {
-  const curr = document.getElementById('set-curr-pass').value;
-  const newP = document.getElementById('set-new-pass').value;
-  const conf = document.getElementById('set-confirm-pass').value;
-  if (!curr || !newP || !conf) { showToast('Please fill all fields','error'); return; }
-  if (newP !== conf) { showToast('New passwords do not match','error'); return; }
-  if (newP.length < 6) { showToast('Password must be at least 6 characters','error'); return; }
-  try {
-    const user = auth.currentUser;
-    const credential = EmailAuthProvider.credential(user.email, curr);
-    await reauthenticateWithCredential(user, credential);
-    await updatePassword(user, newP);
-    showToast('Password updated successfully!');
-    document.getElementById('set-curr-pass').value = '';
-    document.getElementById('set-new-pass').value = '';
-    document.getElementById('set-confirm-pass').value = '';
-  } catch(e) {
-    showToast('Error: ' + (e.message.includes('wrong-password') ? 'Current password is incorrect' : e.message), 'error');
-  }
-};
-
-// ===== ADMIN SECTIONS =====
-window.showAdminSection = function(name) {
-  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.admin-nav-item').forEach(n => n.classList.remove('active'));
-  const el = document.getElementById('admin-'+name);
-  if (el) el.classList.add('active');
-  const titles = {overview:'Dashboard Overview',properties:'Manage Properties',homepage:'Homepage Settings','contact-settings':'Contact Settings','testimonials-admin':'Manage Testimonials',settings:'Account Settings'};
-  document.getElementById('admin-section-title').textContent = titles[name] || 'Admin';
-  const items = document.querySelectorAll('.admin-nav-item');
-  items.forEach(i => { if(i.textContent.trim().toLowerCase().includes(name.replace('-',' ').toLowerCase()) || i.getAttribute('onclick')?.includes(`'${name}'`)) i.classList.add('active'); });
-};
-
-// ===== PROPERTY RENDERING =====
-function propCardHTML(p, isAdmin=false) {
-  const img = p.media && p.media.length > 0 ? p.media[0] : null;
-  const imgTag = img ? (img.type==='video' ? `<video src="${img.url}" muted></video>` : `<img src="${img.url}" alt="${p.title}" loading="lazy">`) : `<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:center;justify-content:center;font-size:3rem">🏠</div>`;
-  const badge = p.status==='sold' ? '<span class="prop-badge sold">Sold</span>' : p.featured==='yes' ? '<span class="prop-badge featured">Featured</span>' : '<span class="prop-badge">Available</span>';
-  return `
-    <div class="prop-card" id="pcard-${p.id}">
-      <div class="prop-img-wrap">${imgTag}${badge}</div>
-      <div class="prop-body">
-        <div class="prop-price">₦${formatPrice(p.price)}</div>
-        <div class="prop-title">${p.title}</div>
-        <div class="prop-location">📍 ${p.location || 'Benin City'}</div>
-        ${p.beds || p.baths ? `<div class="prop-features">${p.beds?`<span class="prop-feat">🛏️ ${p.beds} Bed</span>`:''}${p.baths?`<span class="prop-feat">🚿 ${p.baths} Bath</span>`:''}${p.land?`<span class="prop-feat">📐 ${p.land}</span>`:''}</div>` : ''}
-        <div class="prop-actions">
-          <button class="btn-sm btn-navy" onclick="openPropertyDetail('${p.id}')">View Details</button>
-          <a href="https://wa.me/${getWhatsApp()}?text=${encodeURIComponent('Hello, I am interested in: '+p.title+' - ₦'+formatPrice(p.price))}" target="_blank" class="btn-sm btn-wa">💬 WhatsApp</a>
-        </div>
+// ── PROPERTY CARD ──
+function pCard(p){
+  const imgs=p.imageUrls||[], th=imgs[0]||'';
+  const imgHtml=th ? `<img src="${th}" alt="${p.title}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=pcard-noimg>🏠</div>'">` : `<div class="pcard-noimg">🏠</div>`;
+  const bCls=p.status==='sold'?'pb-sold':p.status==='off-plan'?'pb-off':p.featured==='yes'?'pb-feat':'pb-avail';
+  const bTxt=p.status==='sold'?'Sold':p.status==='off-plan'?'Off-Plan':p.featured==='yes'?'★ Featured':'Available';
+  const meta=[];
+  if(p.beds) meta.push(`<span class="pmet">🛏 ${p.beds} Bed</span>`);
+  if(p.baths) meta.push(`<span class="pmet">🚿 ${p.baths} Bath</span>`);
+  if(p.land) meta.push(`<span class="pmet">📐 ${p.land}</span>`);
+  return `<div class="pcard" id="pc-${p.id}">
+    <div class="pcard-img">${imgHtml}<span class="pbadge ${bCls}">${bTxt}</span><div class="ppricetag">₦${fmtP(p.price)}</div></div>
+    <div class="pcard-body">
+      <div class="pcard-title">${p.title||'Untitled'}</div>
+      <div class="pcard-loc">📍 ${p.location||'Benin City'}</div>
+      ${meta.length?`<div class="pmeta">${meta.join('')}</div>`:''}
+      <div class="pcard-btns">
+        <button class="pcbtn pcbtn-view" onclick="openDetail('${p.id}')">View Details</button>
+        <a href="https://wa.me/${getWA()}?text=${encodeURIComponent('Hi, I\'m interested in: '+p.title+' — ₦'+fmtP(p.price))}" target="_blank" class="pcbtn pcbtn-wa">💬 Enquire</a>
       </div>
-    </div>`;
-}
-
-function formatPrice(p) {
-  if (!p) return '0';
-  const num = parseInt(String(p).replace(/[^0-9]/g,''));
-  return isNaN(num) ? p : num.toLocaleString('en-NG');
-}
-
-function getWhatsApp() {
-  return (adminSettings.whatsapp || '2348166958450');
-}
-
-function renderFeaturedProps() {
-  const grid = document.getElementById('featured-grid');
-  if (!grid) return;
-  const featured = allProperties.filter(p => p.featured === 'yes' && p.visible !== 'no').slice(0,6);
-  if (featured.length === 0) {
-    const vis = allProperties.filter(p => p.visible !== 'no').slice(0,3);
-    grid.innerHTML = vis.length ? vis.map(p => propCardHTML(p)).join('') : '<div class="no-props"><div style="font-size:3rem">🏠</div><p>No properties listed yet. Check back soon!</p></div>';
-    return;
-  }
-  grid.innerHTML = featured.map(p => propCardHTML(p)).join('');
-}
-
-let currentFilter = 'all';
-function renderAllProps(filter) {
-  const grid = document.getElementById('all-props-grid');
-  if (!grid) return;
-  if (filter) currentFilter = filter;
-  let props = allProperties.filter(p => p.visible !== 'no');
-  if (currentFilter !== 'all') props = props.filter(p => p.type === currentFilter);
-  document.getElementById('prop-count').textContent = props.length;
-  grid.innerHTML = props.length ? props.map(p => propCardHTML(p)).join('') : '<div class="no-props"><div style="font-size:3rem">🏠</div><p>No properties found.</p></div>';
-}
-
-window.filterProps = function(f) {
-  document.querySelectorAll('[id^="filter-"]').forEach(b => {
-    b.style.background = 'var(--white)';
-    b.style.color = 'var(--navy)';
-    b.style.border = '1px solid var(--gray-light)';
-  });
-  const active = document.getElementById('filter-'+f);
-  if (active) { active.style.background='var(--gold)'; active.style.color='var(--navy)'; active.style.border='1px solid var(--gold)'; }
-  renderAllProps(f);
-};
-
-function updateHeroStats() {
-  const el = document.getElementById('stat-props');
-  if (el) el.textContent = allProperties.filter(p=>p.visible!=='no').length + '+';
-}
-
-function renderOverviewStats() {
-  const total = allProperties.length;
-  const active = allProperties.filter(p => p.visible !== 'no').length;
-  const hidden = allProperties.filter(p => p.visible === 'no').length;
-  const featured = allProperties.filter(p => p.featured === 'yes').length;
-  document.getElementById('stats-total').textContent = total;
-  document.getElementById('stats-active').textContent = active;
-  document.getElementById('stats-hidden').textContent = hidden;
-  document.getElementById('stats-featured').textContent = featured;
-
-  const recent = allProperties.slice(0, 5);
-  const container = document.getElementById('recent-props-table');
-  if (!container) return;
-  if (recent.length === 0) { container.innerHTML = '<p style="color:var(--gray);padding:20px 0">No properties yet.</p>'; return; }
-  container.innerHTML = `<div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>Title</th><th>Price</th><th>Location</th><th>Visibility</th></tr></thead><tbody>${recent.map(p=>`<tr><td><strong>${p.title||'N/A'}</strong></td><td style="color:var(--gold)">₦${formatPrice(p.price)}</td><td style="color:var(--gray)">${p.location||'—'}</td><td>${p.visible==='no'?'<span class="badge badge-gray">Hidden</span>':'<span class="badge badge-green">Active</span>'}</td></tr>`).join('')}</tbody></table></div>`;
-}
-
-function renderAdminPropsTable() {
-  const tbody = document.getElementById('props-admin-tbody');
-  if (!tbody) return;
-  if (allProperties.length === 0) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:40px">No properties found. Add your first property!</td></tr>'; return; }
-  tbody.innerHTML = allProperties.map(p => `
-    <tr>
-      <td><strong>${p.title||'N/A'}</strong><br><span style="color:var(--gray);font-size:0.8rem">${p.type||'residential'}</span></td>
-      <td style="color:var(--gold);font-weight:600">₦${formatPrice(p.price)}</td>
-      <td style="color:var(--gray);font-size:0.85rem">${p.location||'—'}</td>
-      <td>${p.status==='sold'?'<span class="badge badge-red">Sold</span>':p.status==='off-plan'?'<span class="badge badge-gray">Off-Plan</span>':'<span class="badge badge-green">Available</span>'}</td>
-      <td>${p.visible==='no'?'<span class="badge badge-gray">Hidden</span>':'<span class="badge badge-green">Visible</span>'}</td>
-      <td><div class="action-btns">
-        <button class="icon-btn view" onclick="openPropertyDetail('${p.id}',true)" title="Preview">👁</button>
-        <button class="icon-btn edit" onclick="openEditPropertyModal('${p.id}')" title="Edit">✏️</button>
-        <button class="icon-btn toggle ${p.visible==='no'?'hidden-prop':''}" onclick="togglePropVisibility('${p.id}','${p.visible}')" title="${p.visible==='no'?'Show':'Hide'}">${p.visible==='no'?'👁':'🚫'}</button>
-        <button class="icon-btn del" onclick="deleteProperty('${p.id}')" title="Delete">🗑</button>
-      </div></td>
-    </tr>`).join('');
-}
-
-// ===== PROPERTY DETAIL =====
-window.openPropertyDetail = async function(id, fromAdmin=false) {
-  const p = allProperties.find(x => x.id === id);
-  if (!p) return;
-  currentDetailProp = p;
-  previousPage = fromAdmin ? 'admin-panel' : (currentFilter==='all'?'properties':'properties');
-
-  // Build gallery
-  currentGallery = p.media || [];
-  currentGalleryIdx = 0;
-  renderGallery();
-
-  // Build detail body
-  const feats = p.features ? p.features.split(',').map(f=>f.trim()).filter(f=>f) : [];
-  document.getElementById('detail-body').innerHTML = `
-    <div class="detail-main">
-      <h1>${p.title}</h1>
-      <div class="detail-price">₦${formatPrice(p.price)}</div>
-      <div class="detail-location">📍 ${p.location || 'Benin City'}</div>
-      <div class="detail-features">
-        ${p.beds ? `<div class="feat-box"><span class="feat-box-icon">🛏️</span><div class="feat-box-val">${p.beds}</div><div class="feat-box-label">Bedrooms</div></div>` : ''}
-        ${p.baths ? `<div class="feat-box"><span class="feat-box-icon">🚿</span><div class="feat-box-val">${p.baths}</div><div class="feat-box-label">Bathrooms</div></div>` : ''}
-        ${p.land ? `<div class="feat-box"><span class="feat-box-icon">📐</span><div class="feat-box-val" style="font-size:0.8rem">${p.land}</div><div class="feat-box-label">Land Size</div></div>` : ''}
-        ${p.completion ? `<div class="feat-box"><span class="feat-box-icon">🏗️</span><div class="feat-box-val">${p.completion}%</div><div class="feat-box-label">Completed</div></div>` : ''}
-        ${p.type ? `<div class="feat-box"><span class="feat-box-icon">🏠</span><div class="feat-box-val" style="font-size:0.8rem;text-transform:capitalize">${p.type}</div><div class="feat-box-label">Type</div></div>` : ''}
-        ${p.status ? `<div class="feat-box"><span class="feat-box-icon">📋</span><div class="feat-box-val" style="font-size:0.8rem;text-transform:capitalize">${p.status}</div><div class="feat-box-label">Status</div></div>` : ''}
-      </div>
-      ${p.description ? `<div class="detail-section"><h3>Property Description</h3><p>${p.description}</p></div>` : ''}
-      ${feats.length > 0 ? `<div class="detail-section"><h3>Features & Amenities</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">${feats.map(f=>`<div style="display:flex;align-items:center;gap:8px;color:var(--gray);font-size:0.9rem"><span style="color:var(--gold)">✓</span>${f}</div>`).join('')}</div></div>` : ''}
     </div>
-    <div class="detail-sidebar">
-      <div class="sidebar-card">
-        <h3>Property Price</h3>
-        <div class="sidebar-price">₦${formatPrice(p.price)}</div>
-        <a href="https://wa.me/${getWhatsApp()}?text=${encodeURIComponent('Hello, I am interested in: '+p.title+' - ₦'+formatPrice(p.price)+' at '+p.location)}" target="_blank" class="btn-full btn-wa" style="margin-bottom:12px;border-radius:10px;font-size:0.95rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;color:white;border:none;background:#25D366">💬 Enquire on WhatsApp</a>
-        <a href="tel:${adminSettings.phone||'08166958450'}" class="btn-full btn-navy" style="border-radius:10px;font-size:0.95rem;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;color:white;border:none;background:var(--navy)">📞 Call Us</a>
+  </div>`;
+}
+
+function rFeatured(){
+  const g=document.getElementById('featured-grid'); if(!g) return;
+  const ft=allP.filter(p=>p.visible!=='no'&&p.featured==='yes').slice(0,6);
+  const show=ft.length?ft:allP.filter(p=>p.visible!=='no').slice(0,3);
+  g.innerHTML=show.length?show.map(pCard).join(''):`<div class="no-props"><span class="no-props-ic">🏠</span><p>No properties yet. Check back soon!</p></div>`;
+}
+
+function rAll(f){
+  const g=document.getElementById('all-grid'); if(!g) return;
+  if(f) curF=f;
+  let list=allP.filter(p=>p.visible!=='no');
+  if(curF!=='all') list=list.filter(p=>p.type===curF);
+  const el=document.getElementById('pcount'); if(el) el.textContent=list.length;
+  g.innerHTML=list.length?list.map(pCard).join(''):`<div class="no-props"><span class="no-props-ic">🏠</span><p>No properties found.</p></div>`;
+}
+
+window.filterP = function(f){
+  curF=f;
+  document.querySelectorAll('#fbtns button').forEach(b=>{ b.className='btn btn-outline'; b.style.cssText='padding:9px 18px;font-size:.84rem;'; });
+  const el=document.querySelector(`[data-f="${f}"]`);
+  if(el){ el.className='btn btn-gold'; el.style.cssText='padding:9px 18px;font-size:.84rem;'; }
+  rAll(f);
+};
+
+function rStatCount(){
+  const c=allP.filter(p=>p.visible!=='no').length;
+  ['stat-count','sbar-c'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=c+(id==='stat-count'?'+':''); });
+}
+
+function rATable(){
+  const tb=document.getElementById('ptbody'); if(!tb) return;
+  if(!allP.length){ tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--gray);padding:32px">No properties yet. Add your first property!</td></tr>'; return; }
+  tb.innerHTML=allP.map(p=>`<tr>
+    <td><strong style="display:block">${p.title||'N/A'}</strong><span style="color:var(--gray);font-size:.76rem;text-transform:capitalize">${p.type||'residential'}</span></td>
+    <td style="color:var(--gold);font-weight:600">₦${fmtP(p.price)}</td>
+    <td style="color:var(--gray);font-size:.82rem;max-width:160px">${p.location||'—'}</td>
+    <td>${p.status==='sold'?'<span class="sbdg sbr">Sold</span>':p.status==='off-plan'?'<span class="sbdg sbgr">Off-Plan</span>':'<span class="sbdg sbg">Available</span>'}</td>
+    <td>${p.visible==='no'?'<span class="sbdg sbgr">Hidden</span>':'<span class="sbdg sbg">Visible</span>'}</td>
+    <td><div class="abtns">
+      <button class="abtn v" onclick="openDetail('${p.id}',true)" title="Preview">👁</button>
+      <button class="abtn e" onclick="openEditP('${p.id}')" title="Edit">✏️</button>
+      <button class="abtn t" onclick="toggleV('${p.id}','${p.visible||'yes'}')" title="${p.visible==='no'?'Show':'Hide'}">${p.visible==='no'?'👁':'🙈'}</button>
+      <button class="abtn d" onclick="delP('${p.id}')" title="Delete">🗑</button>
+    </div></td>
+  </tr>`).join('');
+}
+
+function rStats(){
+  const tot=allP.length, act=allP.filter(p=>p.visible!=='no').length, hid=allP.filter(p=>p.visible==='no').length, ft=allP.filter(p=>p.featured==='yes').length;
+  [['st-tot',tot],['st-act',act],['st-hid',hid],['st-ft',ft]].forEach(([id,v])=>{ const el=document.getElementById(id); if(el) el.textContent=v; });
+  const rt=document.getElementById('recent-t'); if(!rt) return;
+  const r=allP.slice(0,5);
+  rt.innerHTML=r.length?`<div style="overflow-x:auto"><table class="atable"><thead><tr><th>Title</th><th>Price</th><th>Status</th><th>Visibility</th></tr></thead><tbody>${r.map(p=>`<tr><td><strong>${p.title||'N/A'}</strong></td><td style="color:var(--gold)">₦${fmtP(p.price)}</td><td>${p.status==='sold'?'<span class="sbdg sbr">Sold</span>':'<span class="sbdg sbg">Available</span>'}</td><td>${p.visible==='no'?'<span class="sbdg sbgr">Hidden</span>':'<span class="sbdg sbg">Visible</span>'}</td></tr>`).join('')}</tbody></table></div>`:'<p style="color:var(--gray);padding:14px 0">No properties yet.</p>';
+}
+
+// ── DETAIL ──
+window.openDetail = function(id, fromAdm=false){
+  const p=allP.find(x=>x.id===id); if(!p){ toast('Property not found','err'); return; }
+  prevPg = fromAdm?'admin-panel':'properties';
+  galI=[]; galX=0;
+  (p.imageUrls||[]).forEach(u=>galI.push({type:'img',url:u}));
+  if(p.videoUrl) galI.push({type:'vid',url:p.videoUrl});
+  rGal();
+  const feats=p.features?p.features.split(',').map(f=>f.trim()).filter(Boolean):[];
+  const rows=[['Price','₦'+fmtP(p.price)],['Type',(p.type||'Residential').replace(/^\w/,c=>c.toUpperCase())],['Status',(p.status||'Available').replace(/^\w/,c=>c.toUpperCase())],['Land Size',p.land||'—'],['Completion',p.completion?p.completion+'%':'100%'],['Location',p.location||'Benin City']].filter(r=>r[1]&&r[1]!=='—');
+  document.getElementById('dbody').innerHTML=`
+    <div class="dmain">
+      <h1 class="dtitle">${p.title}</h1>
+      <div class="dprice">₦${fmtP(p.price)}</div>
+      <div class="dloc">📍 ${p.location||'Benin City'}</div>
+      <div class="dfeats">
+        ${p.beds?`<div class="dfeat"><span class="dfeat-ic">🛏️</span><div class="dfeat-v">${p.beds}</div><div class="dfeat-l">Bedrooms</div></div>`:''}
+        ${p.baths?`<div class="dfeat"><span class="dfeat-ic">🚿</span><div class="dfeat-v">${p.baths}</div><div class="dfeat-l">Bathrooms</div></div>`:''}
+        ${p.land?`<div class="dfeat"><span class="dfeat-ic">📐</span><div class="dfeat-v" style="font-size:.76rem">${p.land}</div><div class="dfeat-l">Land Size</div></div>`:''}
+        ${p.completion?`<div class="dfeat"><span class="dfeat-ic">🏗️</span><div class="dfeat-v">${p.completion}%</div><div class="dfeat-l">Completed</div></div>`:''}
+        ${p.type?`<div class="dfeat"><span class="dfeat-ic">🏠</span><div class="dfeat-v" style="font-size:.76rem;text-transform:capitalize">${p.type}</div><div class="dfeat-l">Type</div></div>`:''}
+        ${p.status?`<div class="dfeat"><span class="dfeat-ic">📋</span><div class="dfeat-v" style="font-size:.76rem;text-transform:capitalize">${p.status}</div><div class="dfeat-l">Status</div></div>`:''}
       </div>
-      <div class="sidebar-card" style="background:var(--navy)">
-        <h3 style="color:var(--white)">Property Details</h3>
-        ${[['Price','₦'+formatPrice(p.price)],['Type',p.type||'Residential'],['Status',p.status||'Available'],['Location',p.location||'Benin City'],['Land Size',p.land||'—'],['Completion',p.completion?p.completion+'%':'100%']].map(([k,v])=>`<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.07)"><span style="color:rgba(255,255,255,0.5);font-size:0.85rem">${k}</span><span style="color:var(--white);font-size:0.85rem;font-weight:500">${v}</span></div>`).join('')}
-      </div>
+      ${p.description?`<div class="dsect"><h3>Description</h3><p>${p.description}</p></div>`:''}
+      ${feats.length?`<div class="dsect"><h3>Features &amp; Amenities</h3><div class="flist">${feats.map(f=>`<div class="fitem"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>${f}</div>`).join('')}</div></div>`:''}
+      ${p.videoUrl?`<div class="dsect"><h3>Video Walkthrough</h3><div class="dvideo">${videoEmbed(p.videoUrl)}</div></div>`:''}
+    </div>
+    <div class="dside">
+      <div class="dsc"><h3>Enquire Now</h3><div class="dsc-price">₦${fmtP(p.price)}</div><div class="dsc-btns"><a href="https://wa.me/${getWA()}?text=${encodeURIComponent('Hi, interested in: '+p.title+' — ₦'+fmtP(p.price)+', '+p.location)}" target="_blank" class="dscbtn wa">💬 WhatsApp Enquiry</a><a href="tel:${cfg.phone||'08166958450'}" class="dscbtn call">📞 Call Us</a></div></div>
+      <div class="dsc"><h3>Property Details</h3><div>${rows.map(([k,v])=>`<div class="ddr"><span class="ddk">${k}</span><span class="ddv">${v}</span></div>`).join('')}</div></div>
     </div>`;
-
-  // Track recently viewed
-  trackRecentlyViewed(p);
-
-  navigate('detail');
-  window.scrollTo(0,0);
+  go('detail');
 };
 
-function renderGallery() {
-  const main = document.getElementById('gallery-main');
-  const dots = document.getElementById('gallery-dots');
-  const thumbs = document.getElementById('gallery-thumbs');
-  if (!main) return;
-
-  if (currentGallery.length === 0) {
-    main.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,var(--navy),var(--navy-mid));font-size:5rem">🏠</div>`;
-    dots.innerHTML = '';
-    thumbs.innerHTML = '';
-    document.getElementById('gal-prev').style.display='none';
-    document.getElementById('gal-next').style.display='none';
-    return;
-  }
-
-  document.getElementById('gal-prev').style.display = currentGallery.length > 1 ? 'flex' : 'none';
-  document.getElementById('gal-next').style.display = currentGallery.length > 1 ? 'flex' : 'none';
-
-  const m = currentGallery[currentGalleryIdx];
-  main.innerHTML = m.type === 'video'
-    ? `<video src="${m.url}" controls autoplay muted style="width:100%;height:100%;object-fit:contain;background:#000"></video>`
-    : `<img src="${m.url}" alt="Property" style="width:100%;height:100%;object-fit:cover;cursor:zoom-in" onclick="openImgOverlay('${m.url}')">`;
-
-  dots.innerHTML = currentGallery.map((_, i) => `<button class="gal-dot${i===currentGalleryIdx?' active':''}" onclick="goToGallery(${i})"></button>`).join('');
-
-  thumbs.innerHTML = currentGallery.map((m, i) => `
-    <div class="gal-thumb${i===currentGalleryIdx?' active':''}" onclick="goToGallery(${i})">
-      ${m.type==='video' ? `<video src="${m.url}" muted></video>` : `<img src="${m.url}" alt="">`}
-    </div>`).join('');
+function rGal(){
+  const gm=document.getElementById('gmain'), gt=document.getElementById('gthumbs'), gc=document.getElementById('gctr');
+  const gp=document.getElementById('garr-prev'), gn=document.getElementById('garr-next');
+  if(!gm) return;
+  if(!galI.length){ gm.innerHTML='<div class="gnone">🏠</div>'; gt.innerHTML=''; if(gc) gc.textContent=''; [gp,gn].forEach(b=>b&&(b.style.display='none')); return; }
+  [gp,gn].forEach(b=>b&&(b.style.display=galI.length>1?'flex':'none'));
+  if(gc) gc.textContent=`${galX+1} / ${galI.length}`;
+  const item=galI[galX];
+  if(item.type==='vid') gm.innerHTML=`<div style="width:100%;height:100%;background:#000">${videoEmbed(item.url)}</div>`;
+  else gm.innerHTML=`<img src="${item.url}" alt="Property" onclick="openLB('${item.url}')" onerror="this.parentNode.innerHTML='<div class=gnone>🏠</div>'">`;
+  gt.innerHTML=galI.map((it,i)=>`<div class="gthumb${i===galX?' act':''}" onclick="gGo(${i})">${it.type==='vid'?'<div class="gthumb-vid">▶</div>':`<img src="${it.url}" onerror="this.style.display='none'">`}</div>`).join('');
 }
+window.gPrev = ()=>{ galX=(galX-1+galI.length)%galI.length; rGal(); };
+window.gNext = ()=>{ galX=(galX+1)%galI.length; rGal(); };
+window.gGo = i=>{ galX=i; rGal(); };
 
-window.galleryPrev = () => { currentGalleryIdx = (currentGalleryIdx - 1 + currentGallery.length) % currentGallery.length; renderGallery(); };
-window.galleryNext = () => { currentGalleryIdx = (currentGalleryIdx + 1) % currentGallery.length; renderGallery(); };
-window.goToGallery = (i) => { currentGalleryIdx = i; renderGallery(); };
-
-// ===== IMG OVERLAY =====
-window.openImgOverlay = (url) => {
-  document.getElementById('overlay-img').src = url;
-  document.getElementById('imgOverlay').style.display = 'flex';
-};
-window.closeImgOverlay = () => { document.getElementById('imgOverlay').style.display = 'none'; };
-document.getElementById('imgOverlay').style.display = 'none';
-
-// ===== ADD / EDIT PROPERTY =====
-window.openAddPropertyModal = function() {
-  editingPropId = null;
-  pendingMedia = [];
-  existingMedia = [];
-  document.getElementById('modal-prop-title').textContent = 'Add New Property';
-  document.getElementById('edit-prop-id').value = '';
-  ['prop-title','prop-price','prop-location','prop-land','prop-desc','prop-feats'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  ['prop-beds','prop-baths','prop-completion'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  document.getElementById('prop-type').value = 'residential';
-  document.getElementById('prop-status').value = 'available';
-  document.getElementById('prop-featured').value = 'no';
-  document.getElementById('prop-visible').value = 'yes';
-  document.getElementById('media-preview').innerHTML = '';
-  openModal('propertyModal');
+// ── ADD / EDIT PROPERTY ──
+window.openAddP = function(){
+  editId=null;
+  document.getElementById('pmt').textContent='Add Property';
+  ['ep-id','ep-ti','ep-pr','ep-lo','ep-ls','ep-de','ep-fe','ep-vid'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  ['ep-bd','ep-bt','ep-co'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('ep-ty').value='residential';
+  document.getElementById('ep-st').value='available';
+  document.getElementById('ep-ft').value='no';
+  document.getElementById('ep-vi').value='yes';
+  document.getElementById('img-list').innerHTML='';
+  document.getElementById('img-prev').innerHTML='';
+  document.getElementById('vid-prev').innerHTML='';
+  addImgRow();
+  openM('propModal');
 };
 
-window.openEditPropertyModal = function(id) {
-  const p = allProperties.find(x => x.id === id);
-  if (!p) return;
-  editingPropId = id;
-  existingMedia = p.media || [];
-  pendingMedia = [];
-  document.getElementById('modal-prop-title').textContent = 'Edit Property';
-  document.getElementById('edit-prop-id').value = id;
-  document.getElementById('prop-title').value = p.title || '';
-  document.getElementById('prop-price').value = p.price || '';
-  document.getElementById('prop-location').value = p.location || '';
-  document.getElementById('prop-land').value = p.land || '';
-  document.getElementById('prop-desc').value = p.description || '';
-  document.getElementById('prop-feats').value = p.features || '';
-  document.getElementById('prop-beds').value = p.beds || '';
-  document.getElementById('prop-baths').value = p.baths || '';
-  document.getElementById('prop-completion').value = p.completion || '';
-  document.getElementById('prop-type').value = p.type || 'residential';
-  document.getElementById('prop-status').value = p.status || 'available';
-  document.getElementById('prop-featured').value = p.featured || 'no';
-  document.getElementById('prop-visible').value = p.visible || 'yes';
-  renderMediaPreview();
-  openModal('propertyModal');
+window.openEditP = function(id){
+  const p=allP.find(x=>x.id===id); if(!p) return;
+  editId=id;
+  document.getElementById('pmt').textContent='Edit Property';
+  document.getElementById('ep-id').value=id;
+  document.getElementById('ep-ti').value=p.title||'';
+  document.getElementById('ep-pr').value=p.price||'';
+  document.getElementById('ep-lo').value=p.location||'';
+  document.getElementById('ep-ls').value=p.land||'';
+  document.getElementById('ep-de').value=p.description||'';
+  document.getElementById('ep-fe').value=p.features||'';
+  document.getElementById('ep-bd').value=p.beds||'';
+  document.getElementById('ep-bt').value=p.baths||'';
+  document.getElementById('ep-co').value=p.completion||'';
+  document.getElementById('ep-ty').value=p.type||'residential';
+  document.getElementById('ep-st').value=p.status||'available';
+  document.getElementById('ep-ft').value=p.featured||'no';
+  document.getElementById('ep-vi').value=p.visible||'yes';
+  document.getElementById('ep-vid').value=p.videoUrl||'';
+  document.getElementById('img-list').innerHTML='';
+  document.getElementById('img-prev').innerHTML='';
+  document.getElementById('vid-prev').innerHTML='';
+  const urls=p.imageUrls||[];
+  if(urls.length) urls.forEach(u=>addImgRow(u));
+  else addImgRow();
+  if(urls.length) prevImgs();
+  openM('propModal');
 };
 
-window.handleMediaUpload = function(e) {
-  const files = Array.from(e.target.files);
-  files.forEach(file => {
-    const url = URL.createObjectURL(file);
-    const type = file.type.startsWith('video') ? 'video' : 'image';
-    pendingMedia.push({ file, url, type, isNew: true });
-  });
-  renderMediaPreview();
+window.addImgRow = function(val=''){
+  const list=document.getElementById('img-list');
+  const row=document.createElement('div'); row.className='url-row';
+  row.innerHTML=`<input type="text" class="iurl" placeholder="https://example.com/image.jpg" value="${val}" style="flex:1;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:.87rem;color:var(--navy);background:var(--off)"><button type="button" class="url-del" onclick="this.parentNode.remove()">✕</button>`;
+  list.appendChild(row);
 };
 
-function renderMediaPreview() {
-  const container = document.getElementById('media-preview');
-  const all = [...existingMedia.map(m=>({...m,isNew:false})), ...pendingMedia];
-  container.innerHTML = all.map((m, i) => `
-    <div class="media-thumb" id="mthumb-${i}">
-      ${m.type==='video' ? `<video src="${m.url}" muted></video>` : `<img src="${m.url}" alt="">`}
-      <button class="media-thumb-del" onclick="removeMedia(${i},${m.isNew?'true':'false'})">✕</button>
-    </div>`).join('');
+window.prevImgs = function(){
+  const urls=[...document.querySelectorAll('.iurl')].map(i=>i.value.trim()).filter(Boolean);
+  document.getElementById('img-prev').innerHTML=urls.map(u=>`<div class="prev-item"><img src="${u}" onerror="this.parentNode.innerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,.4);font-size:1.5rem>🔗</div>'"></div>`).join('');
+};
+
+window.prevVid = function(){
+  const url=document.getElementById('ep-vid').value.trim();
+  document.getElementById('vid-prev').innerHTML=url?`<div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--navy)">${videoEmbed(url)}</div>`:'';
+};
+
+window.saveP = async function(){
+  const ti=document.getElementById('ep-ti').value.trim(), pr=document.getElementById('ep-pr').value.trim();
+  if(!ti||!pr){ toast('Title and price are required','err'); return; }
+  const urls=[...document.querySelectorAll('.iurl')].map(i=>i.value.trim()).filter(Boolean);
+  const data={
+    title:ti, price:pr,
+    location:document.getElementById('ep-lo').value.trim(),
+    type:document.getElementById('ep-ty').value,
+    status:document.getElementById('ep-st').value,
+    land:document.getElementById('ep-ls').value.trim(),
+    beds:document.getElementById('ep-bd').value.trim(),
+    baths:document.getElementById('ep-bt').value.trim(),
+    completion:document.getElementById('ep-co').value.trim(),
+    description:document.getElementById('ep-de').value.trim(),
+    features:document.getElementById('ep-fe').value.trim(),
+    featured:document.getElementById('ep-ft').value,
+    visible:document.getElementById('ep-vi').value,
+    imageUrls:urls,
+    videoUrl:document.getElementById('ep-vid').value.trim(),
+    updatedAt:new Date().toISOString()
+  };
+  try{
+    if(editId){ await updateDoc(doc(db,'properties',editId),data); toast('Property updated!'); }
+    else{ data.createdAt=new Date().toISOString(); await addDoc(collection(db,'properties'),data); toast('Property added!'); }
+    closeM('propModal');
+  } catch(e){ toast('Error: '+e.message,'err'); }
+};
+
+window.toggleV = async(id,cur)=>{ const v=cur==='no'?'yes':'no'; await updateDoc(doc(db,'properties',id),{visible:v}); toast(v==='yes'?'Property is now visible':'Property hidden'); };
+window.delP = async id=>{ if(!confirm('Delete this property? This cannot be undone.')) return; await deleteDoc(doc(db,'properties',id)); toast('Property deleted'); };
+
+// ── TESTIMONIALS ──
+function rTestis(){
+  const g=document.getElementById('testi-grid'); if(!g||!allT.length) return;
+  g.innerHTML=allT.map(t=>`<div class="tcard"><div class="tstars">${'★'.repeat(parseInt(t.stars)||5)}</div><p class="ttxt">"${t.text}"</p><div class="tauthor"><div class="tav">${(t.name||'A')[0]}</div><div><div class="tname">${t.name}</div><div class="trole">${t.role||''}</div></div></div></div>`).join('');
 }
-
-window.removeMedia = function(idx, isNew) {
-  const allMedia = [...existingMedia.map(m=>({...m,isNew:false})), ...pendingMedia];
-  const item = allMedia[idx];
-  if (!item.isNew) {
-    existingMedia = existingMedia.filter(m => m.url !== item.url);
-  } else {
-    pendingMedia = pendingMedia.filter(m => m.url !== item.url);
-  }
-  renderMediaPreview();
-};
-
-window.saveProperty = async function() {
-  const title = document.getElementById('prop-title').value.trim();
-  const price = document.getElementById('prop-price').value.trim();
-  const location = document.getElementById('prop-location').value.trim();
-  if (!title || !price) { showToast('Title and price are required','error'); return; }
-
-  const saveBtn = document.querySelector('#propertyModal .btn-gold[onclick="saveProperty()"]');
-  if (saveBtn) { saveBtn.textContent = 'Saving...'; saveBtn.disabled = true; }
-
-  try {
-    // Upload new media
-    const uploadedMedia = [];
-    for (const m of pendingMedia) {
-      if (m.isNew && m.file) {
-        const path = `properties/${Date.now()}_${m.file.name}`;
-        const storageRef = ref(storage, path);
-        await new Promise((res, rej) => {
-          const task = uploadBytesResumable(storageRef, m.file);
-          task.on('state_changed', null, rej, async () => {
-            const url = await getDownloadURL(task.snapshot.ref);
-            uploadedMedia.push({ url, type: m.type, path });
-            res();
-          });
-        });
-      }
-    }
-
-    const finalMedia = [...existingMedia, ...uploadedMedia];
-
-    const data = {
-      title,
-      price: document.getElementById('prop-price').value.trim(),
-      location,
-      type: document.getElementById('prop-type').value,
-      status: document.getElementById('prop-status').value,
-      land: document.getElementById('prop-land').value.trim(),
-      beds: document.getElementById('prop-beds').value.trim(),
-      baths: document.getElementById('prop-baths').value.trim(),
-      completion: document.getElementById('prop-completion').value.trim(),
-      description: document.getElementById('prop-desc').value.trim(),
-      features: document.getElementById('prop-feats').value.trim(),
-      featured: document.getElementById('prop-featured').value,
-      visible: document.getElementById('prop-visible').value,
-      media: finalMedia,
-      updatedAt: new Date().toISOString()
-    };
-
-    if (editingPropId) {
-      await updateDoc(doc(db,'properties',editingPropId), data);
-      showToast('Property updated successfully!');
-    } else {
-      data.createdAt = new Date().toISOString();
-      await addDoc(collection(db,'properties'), data);
-      showToast('Property added successfully!');
-    }
-    closeModal('propertyModal');
-  } catch(e) {
-    showToast('Error saving property: '+e.message,'error');
-  } finally {
-    if (saveBtn) { saveBtn.textContent = 'Save Property'; saveBtn.disabled = false; }
-  }
-};
-
-window.togglePropVisibility = async function(id, current) {
-  const newVal = current === 'no' ? 'yes' : 'no';
-  await updateDoc(doc(db,'properties',id), { visible: newVal });
-  showToast(newVal==='yes' ? 'Property is now visible' : 'Property hidden from site');
-};
-
-window.deleteProperty = async function(id) {
-  if (!confirm('Are you sure you want to delete this property? This cannot be undone.')) return;
-  await deleteDoc(doc(db,'properties',id));
-  showToast('Property deleted');
-};
-
-// ===== TESTIMONIALS =====
-function loadTestimonialsListener() {
-  onSnapshot(collection(db,'testimonials'), (snap) => {
-    allTestimonials = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderTestimonials();
-  });
+function rTestisAdm(){
+  const tb=document.getElementById('ttbody'); if(!tb) return;
+  tb.innerHTML=allT.length?allT.map(t=>`<tr><td><strong>${t.name}</strong></td><td style="color:var(--gray)">${t.role||''}</td><td style="color:var(--gray);font-size:.81rem;max-width:260px">${(t.text||'').slice(0,80)}...</td><td><button class="abtn d" onclick="delT('${t.id}')">🗑</button></td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--gray);padding:26px">No testimonials yet.</td></tr>';
 }
-
-function renderTestimonials() {
-  const grid = document.getElementById('testimonials-grid');
-  if (!grid) return;
-  if (allTestimonials.length > 0) {
-    grid.innerHTML = allTestimonials.map(t => `
-      <div class="testi-card">
-        <div class="testi-stars">${'★'.repeat(parseInt(t.stars)||5)}</div>
-        <p class="testi-text">"${t.text}"</p>
-        <div class="testi-author">
-          <div class="testi-avatar">${(t.name||'A').charAt(0)}</div>
-          <div><div class="testi-name">${t.name}</div><div class="testi-role">${t.role}</div></div>
-        </div>
-      </div>`).join('');
-  }
-}
-
-function loadTestimonialsAdmin() {
-  const tbody = document.getElementById('testi-admin-tbody');
-  if (!tbody) return;
-  if (allTestimonials.length === 0) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--gray);padding:32px">No testimonials yet.</td></tr>'; return; }
-  tbody.innerHTML = allTestimonials.map(t => `
-    <tr>
-      <td><strong>${t.name}</strong></td>
-      <td style="color:var(--gray)">${t.role}</td>
-      <td style="color:var(--gray);max-width:300px;font-size:0.85rem">${(t.text||'').substring(0,80)}...</td>
-      <td><div class="action-btns"><button class="icon-btn del" onclick="deleteTestimonial('${t.id}')">🗑</button></div></td>
-    </tr>`).join('');
-}
-
-window.openAddTestiModal = () => {
-  document.getElementById('testi-name').value = '';
-  document.getElementById('testi-role').value = '';
-  document.getElementById('testi-text').value = '';
-  openModal('testiModal');
+window.openAddT = ()=>{ ['t-nm','t-ro','t-tx'].forEach(id=>document.getElementById(id).value=''); openM('testiModal'); };
+window.saveT = async()=>{
+  const nm=document.getElementById('t-nm').value.trim(), tx=document.getElementById('t-tx').value.trim();
+  if(!nm||!tx){ toast('Name and review required','err'); return; }
+  await addDoc(collection(db,'testimonials'),{name:nm,role:document.getElementById('t-ro').value.trim(),text:tx,stars:document.getElementById('t-st').value,createdAt:new Date().toISOString()});
+  toast('Testimonial added!'); closeM('testiModal');
 };
+window.delT = async id=>{ if(!confirm('Delete?')) return; await deleteDoc(doc(db,'testimonials',id)); toast('Deleted'); };
 
-window.saveTestimonial = async function() {
-  const name = document.getElementById('testi-name').value.trim();
-  const role = document.getElementById('testi-role').value.trim();
-  const text = document.getElementById('testi-text').value.trim();
-  if (!name || !text) { showToast('Name and review are required','error'); return; }
-  await addDoc(collection(db,'testimonials'), { name, role, text, stars: document.getElementById('testi-stars').value, createdAt: new Date().toISOString() });
-  showToast('Testimonial added!');
-  closeModal('testiModal');
-  loadTestimonialsAdmin();
+// ── CONTACT FORM ──
+window.sendContact = async()=>{
+  const name=(document.getElementById('cf-fn').value+' '+document.getElementById('cf-ln').value).trim();
+  const email=document.getElementById('cf-em').value.trim(), msg=document.getElementById('cf-ms').value.trim();
+  if(!name||!email||!msg){ toast('Please fill required fields','err'); return; }
+  try{
+    await addDoc(collection(db,'contacts'),{name,email,phone:document.getElementById('cf-ph').value,subject:document.getElementById('cf-su').value,message:msg,createdAt:new Date().toISOString()});
+    toast("Message sent! We'll be in touch soon.");
+    ['cf-fn','cf-ln','cf-em','cf-ph','cf-su','cf-ms'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  } catch(e){ toast('Error: '+e.message,'err'); }
 };
-
-window.deleteTestimonial = async function(id) {
-  if (!confirm('Delete this testimonial?')) return;
-  await deleteDoc(doc(db,'testimonials',id));
-  showToast('Testimonial deleted');
-  loadTestimonialsAdmin();
-};
-
-// ===== CONTACT FORM =====
-window.sendContactForm = async function() {
-  const name = (document.getElementById('cf-fname').value + ' ' + document.getElementById('cf-lname').value).trim();
-  const email = document.getElementById('cf-email').value.trim();
-  const message = document.getElementById('cf-message').value.trim();
-  if (!name || !email || !message) { showToast('Please fill required fields','error'); return; }
-  try {
-    await addDoc(collection(db,'contacts'), {
-      name, email,
-      phone: document.getElementById('cf-phone').value,
-      subject: document.getElementById('cf-subject').value,
-      message,
-      createdAt: new Date().toISOString()
-    });
-    showToast('Message sent! We\'ll be in touch soon.');
-    ['cf-fname','cf-lname','cf-email','cf-phone','cf-subject','cf-message'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
-  } catch(e) { showToast('Error: '+e.message,'error'); }
-};
-// ===== RECENTLY VIEWED =====
-function trackRecentlyViewed(p) {
-  try {
-    let rv = JSON.parse(sessionStorage.getItem('rv') || '[]');
-    rv = rv.filter(x => x.id !== p.id);
-    rv.unshift({ id: p.id, title: p.title, price: p.price, media: p.media });
-    if (rv.length > 6) rv = rv.slice(0, 6);
-    sessionStorage.setItem('rv', JSON.stringify(rv));
-    renderRecentlyViewed(rv);
-  } catch(e) {}
-}
-
-function renderRecentlyViewed(rv) {
-  const inner = document.getElementById('rv-inner');
-  const scroll = document.getElementById('rv-scroll');
-  if (!inner || !scroll) return;
-  if (!rv || rv.length === 0) { inner.classList.remove('has-items'); return; }
-  inner.classList.add('has-items');
-  scroll.innerHTML = rv.map(item => {
-    const img = item.media && item.media[0];
-    const imgContent = img && img.type !== 'video'
-      ? `<img src="${img.url}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">`
-      : `<span>🏠</span>`;
-    return `<div class="rv-card" onclick="openPropertyDetail('${item.id}')">
-      <div class="rv-card-img">${imgContent}</div>
-      <div class="rv-card-info">
-        <div class="rv-card-title">${item.title}</div>
-        <div class="rv-card-price">₦${formatPrice(item.price)}</div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// Restore recently viewed on page load
-try {
-  const rv = JSON.parse(sessionStorage.getItem('rv') || '[]');
-  if (rv.length) renderRecentlyViewed(rv);
-} catch(e) {}
-
-// ===== INSTALL APP (PWA) =====
-let deferredInstallPrompt = null;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredInstallPrompt = e;
-  const btn = document.getElementById('install-app-btn');
-  if (btn) btn.classList.add('visible');
-});
-
-window.installApp = async function() {
-  if (!deferredInstallPrompt) return;
-  deferredInstallPrompt.prompt();
-  const { outcome } = await deferredInstallPrompt.userChoice;
-  if (outcome === 'accepted') {
-    const btn = document.getElementById('install-app-btn');
-    if (btn) btn.classList.remove('visible');
-    deferredInstallPrompt = null;
-  }
-};
-
-window.addEventListener('appinstalled', () => {
-  const btn = document.getElementById('install-app-btn');
-  if (btn) btn.classList.remove('visible');
-  deferredInstallPrompt = null;
-});
-
 </script>
 </body>
 </html>
