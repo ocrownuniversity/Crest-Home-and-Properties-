@@ -414,16 +414,25 @@ input,textarea,select{font-family:'Inter',sans-serif;}
 .lbrand h2{font-size:1.8rem;color:var(--navy);margin-bottom:5px;}
 .lbrand p{color:var(--gray);font-size:.87rem;}
 #page-admin-panel{background:#f0f3f8;min-height:100vh;}
-.aside{position:fixed;left:0;top:0;bottom:0;width:252px;background:var(--navy);overflow-y:auto;z-index:200;transition:var(--ease);}
-.aside-brand{padding:22px 20px;border-bottom:1px solid rgba(255,255,255,.07);}
+.aside{position:fixed;left:0;top:0;bottom:0;width:252px;background:var(--navy);overflow-y:auto;z-index:300;transition:transform .35s cubic-bezier(.4,0,.2,1);}
+.aside-brand{padding:22px 20px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;}
 .aside-brand h3{font-family:'Playfair Display',serif;color:var(--white);font-size:1.05rem;}
-.aside-brand span{color:var(--gold2);font-size:.67rem;letter-spacing:1px;}
+.aside-brand span{color:var(--gold2);font-size:.67rem;letter-spacing:1px;display:block;margin-top:2px;}
+.aside-close{display:none;background:none;border:none;color:rgba(255,255,255,.5);font-size:1.2rem;cursor:pointer;padding:4px;line-height:1;}
+.aside-close:hover{color:var(--white);}
 .anav{padding:10px 0;}
 .anav-item{display:flex;align-items:center;gap:12px;padding:12px 20px;color:rgba(255,255,255,.48);font-size:.87rem;cursor:pointer;transition:var(--ease);border-left:3px solid transparent;}
 .anav-item:hover,.anav-item.act{color:var(--gold2);background:rgba(200,151,63,.07);border-left-color:var(--gold);}
 .anav-item svg{width:16px;height:16px;flex-shrink:0;}
 .anav-sep{border-top:1px solid rgba(255,255,255,.06);margin:8px 0;}
 .amain{margin-left:252px;padding:28px 32px;min-height:100vh;}
+/* Sidebar overlay backdrop (mobile only) */
+#aside-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:299;backdrop-filter:blur(2px);}
+#aside-overlay.show{display:block;}
+/* Admin top bar hamburger */
+.admin-ham{display:none;flex-direction:column;gap:4px;padding:8px;border-radius:8px;background:rgba(11,31,58,.07);border:1px solid var(--border);cursor:pointer;}
+.admin-ham i{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px;transition:var(--ease);}
+.admin-ham:hover{background:rgba(11,31,58,.12);}
 .atopbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:12px;}
 .atopbar h2{font-size:1.5rem;color:var(--navy);font-weight:700;}
 .atopbar p{color:var(--gray);font-size:.8rem;margin-top:2px;}
@@ -502,8 +511,18 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
   .dside{position:static;}
   .fgrid{grid-template-columns:1fr 1fr;}
   .srow{grid-template-columns:1fr 1fr;}
+  /* On tablet: sidebar still fixed but narrower */
   .aside{width:220px;}
   .amain{margin-left:220px;}
+}
+@media(max-width:900px){
+  /* Sidebar becomes overlay — amain takes full width */
+  .aside{transform:translateX(-100%);width:260px;z-index:400;}
+  .aside.open{transform:translateX(0);}
+  .aside-close{display:block;}
+  .amain{margin-left:0;padding:20px 18px;}
+  .admin-ham{display:flex;}
+  .srow{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
   .nav-links{display:none;}
@@ -513,9 +532,6 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
   .sbar-item:nth-child(3){border-top:1px solid var(--border);}
   .sbar-item:nth-child(4){border-top:1px solid var(--border);border-right:none;}
   .fgrid{grid-template-columns:1fr;}
-  .aside{transform:translateX(-100%);}
-  .aside.open{transform:translateX(0);}
-  .amain{margin-left:0;padding:18px 16px;}
   .frow{grid-template-columns:1fr;}
   .gmain{height:300px;}
   .dfeats{grid-template-columns:1fr 1fr;}
@@ -524,6 +540,7 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
   .hero-search input,.hero-search select,.hero-search-btn{width:100%;}
   #toasts{bottom:80px;right:12px;left:12px;}
   .toast{font-size:.82rem;}
+  .srow{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:540px){
   .sec{padding:64px 5%;}
@@ -537,6 +554,7 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
   .dfeats{grid-template-columns:1fr 1fr;}
   .avals{grid-template-columns:1fr;}
   .lcard{padding:36px 24px;}
+  .amain{padding:14px 12px;}
 }
 </style>
 </head>
@@ -552,6 +570,9 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
 
 <!-- TOASTS -->
 <div id="toasts"></div>
+
+<!-- ADMIN SIDEBAR OVERLAY -->
+<div id="aside-overlay" onclick="closeAdminSidebar()"></div>
 
 <!-- WhatsApp Float -->
 <a id="wa-float" href="https://wa.me/2348166958450" target="_blank" title="Chat on WhatsApp">
@@ -575,22 +596,23 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-wrap">
-    <div class="nav-logo" onclick="go('home')">
-      <div class="nav-logo-box">C</div>
+    <div class="nav-logo" id="navLogo">
+      <div class="nav-logo-box" id="logoBox">C</div>
       <div class="nav-logo-text"><strong>Crest Homes</strong><span>& Properties Ltd</span></div>
     </div>
     <div class="nav-links">
-      <a href="#" onclick="go('home')" id="nl-home" class="act">Home</a>
-      <a href="#" onclick="go('properties')" id="nl-properties">Properties</a>
-      <a href="#" onclick="go('about')" id="nl-about">About</a>
-      <a href="#" onclick="go('contact')" id="nl-contact">Contact</a>
+      <a href="#" onclick="go('home');return false;" id="nl-home" class="act">Home</a>
+      <a href="#" onclick="go('properties');return false;" id="nl-properties">Properties</a>
+      <a href="#" onclick="go('about');return false;" id="nl-about">About</a>
+      <a href="#" onclick="go('contact');return false;" id="nl-contact">Contact</a>
     </div>
     <div class="nav-right">
       <button class="nav-wish" onclick="go('wishlist')" title="Wishlist">
         ♡
         <span class="wish-count" id="wish-count">0</span>
       </button>
-      <a href="#" onclick="go('admin-login')" class="nav-links" style="display:flex"><a href="#" onclick="go('admin-login')" class="nav-cta" style="padding:8px 16px;border-radius:8px;background:var(--gold);color:var(--navy);font-size:.85rem;font-weight:700;white-space:nowrap;display:none" id="nl-admin-btn">Admin ↗</a></a>
+      <!-- Admin button: only shown after 5-second logo hold OR when logged in -->
+      <button id="nl-admin-btn" onclick="go('admin-login')" style="display:none;padding:8px 16px;border-radius:8px;background:var(--gold);color:var(--navy);font-size:.85rem;font-weight:700;white-space:nowrap;border:none;cursor:pointer;">Admin ↗</button>
     </div>
     <button class="hamburger" id="hamBtn" onclick="openMob()"><i></i><i></i><i></i></button>
   </div>
@@ -946,8 +968,8 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
   <div style="min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:20px;">
     <div class="lcard">
       <div class="lbrand"><div class="lbrand-ic">C</div><h2>Admin Portal</h2><p>Sign in to manage your website</p></div>
-      <div class="fg"><label>Email</label><input type="email" id="adm-em" value="oladepodamilola64@gmail.com"></div>
-      <div class="fg"><label>Password</label><input type="password" id="adm-pw" value="123456" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+      <div class="fg"><label>Email</label><input type="email" id="adm-em" placeholder="Enter admin email" autocomplete="off"></div>
+      <div class="fg"><label>Password</label><input type="password" id="adm-pw" placeholder="Enter password" autocomplete="off" onkeydown="if(event.key==='Enter')adminLogin()"></div>
       <button onclick="adminLogin()" class="btn btn-gold" style="width:100%;margin-top:8px;justify-content:center">Sign In →</button>
       <p style="text-align:center;margin-top:20px;font-size:.83rem;"><a href="#" onclick="go('home')" style="color:var(--gold)">← Back to Website</a></p>
     </div>
@@ -959,7 +981,10 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-admin-panel">
   <div class="aside" id="aside">
-    <div class="aside-brand"><h3>Crest Homes</h3><span>Admin Dashboard</span></div>
+    <div class="aside-brand">
+      <div><h3>Crest Homes</h3><span>Admin Dashboard</span></div>
+      <button class="aside-close" onclick="closeAdminSidebar()" title="Close menu">✕</button>
+    </div>
     <nav class="anav">
       <div class="anav-item act" onclick="asec('overview')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Overview</div>
       <div class="anav-item" onclick="asec('properties')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Properties</div>
@@ -974,9 +999,11 @@ footer{background:var(--black);color:var(--white);padding:72px 5% 32px;}
   </div>
   <div class="amain">
     <div class="atopbar">
-      <div><h2 id="atitle">Dashboard Overview</h2><p>Welcome back, Admin!</p></div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button class="admin-ham" onclick="openAdminSidebar()" id="admin-ham-btn"><i></i><i></i><i></i></button>
+        <div><h2 id="atitle">Dashboard Overview</h2><p>Welcome back, Admin!</p></div>
+      </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button onclick="document.getElementById('aside').classList.toggle('open')" class="sbtn" style="display:none;padding:9px 14px;" id="aside-toggle">☰</button>
         <button onclick="openAddP()" class="sbtn">+ Add Property</button>
       </div>
     </div>
@@ -1203,21 +1230,77 @@ window.addEventListener('load', async () => {
   onSnapshot(doc(db,'settings','main'), s=>{ if(s.exists()){ cfg=s.data(); applyCfg(); } });
   onAuthStateChanged(auth, u=>{
     isAdmin=!!u;
-    // Show admin nav link only when logged in
     const btn=document.getElementById('nl-admin-btn');
-    if(btn) btn.style.display=u?'':'none';
-    if(u&&document.getElementById('page-admin-login').classList.contains('active')) go('admin-panel');
+    if(btn){
+      if(u){
+        btn.style.display='';
+        localStorage.setItem('ch_adm_unlocked','1');
+      } else {
+        // Keep visible only if manually unlocked via logo hold
+        if(localStorage.getItem('ch_adm_unlocked')!=='1') btn.style.display='none';
+      }
+    }
+    if(u && document.getElementById('page-admin-login').classList.contains('active')) go('admin-panel');
   });
   addImgRow();
   updateWishCount();
   rRecently();
-
-  // Admin sidebar toggle on mobile
-  const at=document.getElementById('aside-toggle');
-  if(at) at.style.display='flex';
 });
 
-// ── NAV ──
+// ── 5-SECOND LOGO HOLD → reveal admin button ──
+(function(){
+  const logo=document.getElementById('logoBox');
+  const navLogo=document.getElementById('navLogo');
+  let holdTimer=null, holdStart=0;
+  const HOLD_MS=5000;
+  const adminUnlocked=localStorage.getItem('ch_adm_unlocked')==='1';
+  if(adminUnlocked){ const b=document.getElementById('nl-admin-btn'); if(b) b.style.display=''; }
+
+  function startHold(e){
+    holdStart=Date.now();
+    logo.style.transition='transform 5s linear,box-shadow 5s linear';
+    logo.style.transform='scale(0.85)';
+    logo.style.boxShadow='0 0 0 4px rgba(200,151,63,.6)';
+    holdTimer=setTimeout(()=>{
+      localStorage.setItem('ch_adm_unlocked','1');
+      const b=document.getElementById('nl-admin-btn'); if(b) b.style.display='';
+      toast('🔓 Admin access unlocked! Hold for 3s to hide.'); 
+      resetLogo();
+    },HOLD_MS);
+  }
+  function endHold(){
+    clearTimeout(holdTimer);
+    resetLogo();
+    // If held for 3s+ while already unlocked, re-lock
+    if(adminUnlocked && Date.now()-holdStart>=3000 && Date.now()-holdStart<HOLD_MS){
+      localStorage.removeItem('ch_adm_unlocked');
+      const b=document.getElementById('nl-admin-btn'); if(b) b.style.display='none';
+      toast('🔒 Admin access hidden');
+    }
+  }
+  function resetLogo(){
+    logo.style.transition='';
+    logo.style.transform='';
+    logo.style.boxShadow='';
+  }
+  // Also navigate home on short tap
+  navLogo.addEventListener('mousedown',startHold);
+  navLogo.addEventListener('touchstart',startHold,{passive:true});
+  navLogo.addEventListener('mouseup',e=>{ endHold(); if(Date.now()-holdStart<300) go('home'); });
+  navLogo.addEventListener('touchend',e=>{ endHold(); if(Date.now()-holdStart<300) go('home'); });
+  navLogo.addEventListener('mouseleave',endHold);
+  navLogo.addEventListener('touchcancel',endHold);
+})();
+
+// ── ADMIN SIDEBAR ──
+window.openAdminSidebar = function(){
+  document.getElementById('aside').classList.add('open');
+  document.getElementById('aside-overlay').classList.add('show');
+};
+window.closeAdminSidebar = function(){
+  document.getElementById('aside').classList.remove('open');
+  document.getElementById('aside-overlay').classList.remove('show');
+};
 window.go = function(pg){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const el=document.getElementById('page-'+pg); if(el) el.classList.add('active');
@@ -1364,6 +1447,8 @@ window.asec = function(n){
   const titles={overview:'Dashboard Overview',properties:'Manage Properties',homepage:'Homepage Settings','contact-set':'Contact Settings',testimonials:'Testimonials',settings:'Account Settings'};
   document.getElementById('atitle').textContent=titles[n]||'Admin';
   document.querySelectorAll('.anav-item').forEach(i=>{ if(i.getAttribute('onclick')?.includes(`'${n}'`)) i.classList.add('act'); });
+  // Auto-close sidebar on mobile after nav tap
+  if(window.innerWidth<=900) closeAdminSidebar();
 };
 
 // ── WISHLIST ──
