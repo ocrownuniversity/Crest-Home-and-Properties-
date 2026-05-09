@@ -1233,11 +1233,12 @@ window.addEventListener('load', async () => {
     const btn=document.getElementById('nl-admin-btn');
     if(btn){
       if(u){
-        btn.style.display='';
-        localStorage.setItem('ch_adm_unlocked','1');
+        // Logged-in admin: always show button
+        btn.style.display='inline-flex';
+        sessionStorage.setItem('ch_adm_sess','1');
       } else {
-        // Keep visible only if manually unlocked via logo hold
-        if(localStorage.getItem('ch_adm_unlocked')!=='1') btn.style.display='none';
+        // Not logged in: only show if unlocked via logo hold this session
+        if(sessionStorage.getItem('ch_adm_sess')!=='1') btn.style.display='none';
       }
     }
     if(u && document.getElementById('page-admin-login').classList.contains('active')) go('admin-panel');
@@ -1248,48 +1249,55 @@ window.addEventListener('load', async () => {
 });
 
 // ── 5-SECOND LOGO HOLD → reveal admin button ──
-(function(){
+// Must run after go() is defined
+(function initLogoHold(){
   const logo=document.getElementById('logoBox');
   const navLogo=document.getElementById('navLogo');
-  let holdTimer=null, holdStart=0;
+  if(!logo||!navLogo) return;
+  let holdTimer=null, holdStart=0, isHolding=false;
   const HOLD_MS=5000;
-  const adminUnlocked=localStorage.getItem('ch_adm_unlocked')==='1';
-  if(adminUnlocked){ const b=document.getElementById('nl-admin-btn'); if(b) b.style.display=''; }
 
-  function startHold(e){
-    holdStart=Date.now();
-    logo.style.transition='transform 5s linear,box-shadow 5s linear';
-    logo.style.transform='scale(0.85)';
-    logo.style.boxShadow='0 0 0 4px rgba(200,151,63,.6)';
+  function showAdminBtn(){ const b=document.getElementById('nl-admin-btn'); if(b) b.style.display='inline-flex'; }
+  function hideAdminBtn(){ const b=document.getElementById('nl-admin-btn'); if(b) b.style.display='none'; }
+
+  // Check if already unlocked in this session
+  if(sessionStorage.getItem('ch_adm_sess')==='1') showAdminBtn();
+
+  function startHold(){
+    if(isHolding) return;
+    isHolding=true; holdStart=Date.now();
+    logo.style.outline='3px solid rgba(200,151,63,.5)';
+    logo.style.outlineOffset='3px';
     holdTimer=setTimeout(()=>{
-      localStorage.setItem('ch_adm_unlocked','1');
-      const b=document.getElementById('nl-admin-btn'); if(b) b.style.display='';
-      toast('🔓 Admin access unlocked! Hold for 3s to hide.'); 
+      sessionStorage.setItem('ch_adm_sess','1');
+      showAdminBtn();
+      toast('🔓 Admin access unlocked');
       resetLogo();
     },HOLD_MS);
   }
-  function endHold(){
+  function endHold(e){
+    if(!isHolding) return;
     clearTimeout(holdTimer);
+    const held=Date.now()-holdStart;
+    isHolding=false;
     resetLogo();
-    // If held for 3s+ while already unlocked, re-lock
-    if(adminUnlocked && Date.now()-holdStart>=3000 && Date.now()-holdStart<HOLD_MS){
-      localStorage.removeItem('ch_adm_unlocked');
-      const b=document.getElementById('nl-admin-btn'); if(b) b.style.display='none';
-      toast('🔒 Admin access hidden');
+    // Short tap → go home
+    if(held<400) go('home');
+    // 3s hold while already unlocked → re-lock
+    if(sessionStorage.getItem('ch_adm_sess')==='1' && held>=3000 && held<HOLD_MS){
+      sessionStorage.removeItem('ch_adm_sess');
+      if(!auth.currentUser) hideAdminBtn();
+      toast('🔒 Admin button hidden');
     }
   }
-  function resetLogo(){
-    logo.style.transition='';
-    logo.style.transform='';
-    logo.style.boxShadow='';
-  }
-  // Also navigate home on short tap
-  navLogo.addEventListener('mousedown',startHold);
-  navLogo.addEventListener('touchstart',startHold,{passive:true});
-  navLogo.addEventListener('mouseup',e=>{ endHold(); if(Date.now()-holdStart<300) go('home'); });
-  navLogo.addEventListener('touchend',e=>{ endHold(); if(Date.now()-holdStart<300) go('home'); });
-  navLogo.addEventListener('mouseleave',endHold);
-  navLogo.addEventListener('touchcancel',endHold);
+  function resetLogo(){ logo.style.outline=''; logo.style.outlineOffset=''; }
+
+  navLogo.addEventListener('mousedown', startHold);
+  navLogo.addEventListener('touchstart', startHold, {passive:true});
+  navLogo.addEventListener('mouseup', endHold);
+  navLogo.addEventListener('touchend', endHold);
+  navLogo.addEventListener('mouseleave', ()=>{ if(isHolding){ clearTimeout(holdTimer); isHolding=false; resetLogo(); } });
+  navLogo.addEventListener('touchcancel', ()=>{ if(isHolding){ clearTimeout(holdTimer); isHolding=false; resetLogo(); } });
 })();
 
 // ── ADMIN SIDEBAR ──
@@ -1427,7 +1435,12 @@ window.adminLogin = async()=>{
     toast('Welcome back!'); go('admin-panel');
   }catch(e){ toast('Invalid credentials','err'); }
 };
-window.adminLogout = async()=>{ await signOut(auth); toast('Logged out'); go('home'); };
+window.adminLogout = async()=>{ 
+  await signOut(auth); 
+  sessionStorage.removeItem('ch_adm_sess');
+  const btn=document.getElementById('nl-admin-btn'); if(btn) btn.style.display='none';
+  toast('Logged out'); go('home'); 
+};
 window.changePass = async()=>{
   const c=document.getElementById('sp-c').value, n=document.getElementById('sp-n').value, cf=document.getElementById('sp-cf').value;
   if(!c||!n||!cf){toast('Fill all fields','err');return;} if(n!==cf){toast('Passwords do not match','err');return;}
@@ -1678,22 +1691,32 @@ window.saveInspection = async function(){
   const name=document.getElementById('insp-name').value.trim();
   const phone=document.getElementById('insp-phone').value.trim();
   const date=document.getElementById('insp-date').value;
-  if(!name||!phone||!date){ toast('Please fill required fields','err'); return; }
+  if(!name||!phone||!date){ toast('Please fill name, phone and date','err'); return; }
+  const p=allP.find(x=>x.id===currentInspProp);
+  const email=document.getElementById('insp-email').value.trim();
+  const time=document.getElementById('insp-time').value;
+  const note=document.getElementById('insp-note').value.trim();
+
+  // Build WhatsApp message for instant delivery to agent
+  const waMsg=`📅 *INSPECTION BOOKING*\n\n🏠 Property: ${p?.title||'N/A'}\n👤 Name: ${name}\n📞 Phone: ${phone}\n${email?'✉️ Email: '+email+'\n':''}📆 Date: ${date}\n⏰ Time: ${time}\n${note?'📝 Notes: '+note:''}`;
+  const waNum=getWA();
+
+  // Try saving to Firestore silently
   try{
-    const p=allP.find(x=>x.id===currentInspProp);
     await addDoc(collection(db,'inspections'),{
-      name, phone,
-      email:document.getElementById('insp-email').value.trim(),
-      date, time:document.getElementById('insp-time').value,
-      note:document.getElementById('insp-note').value.trim(),
+      name,phone,email,date,time,note,
       propertyId:currentInspProp,
       propertyTitle:p?.title||'',
       createdAt:new Date().toISOString()
     });
-    toast('Inspection booked! We\'ll contact you soon.');
-    closeM('inspModal');
-    ['insp-name','insp-phone','insp-email','insp-date','insp-note'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
-  }catch(e){ toast('Error: '+e.message,'err'); }
+  }catch(e){ /* Firestore may require auth — WhatsApp is the fallback */ }
+
+  closeM('inspModal');
+  ['insp-name','insp-phone','insp-email','insp-date','insp-note'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+
+  // Show success then open WhatsApp
+  toast('✅ Booking confirmed! Opening WhatsApp...');
+  setTimeout(()=>{ window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(waMsg)}`,'_blank'); },900);
 };
 
 // ── ADD / EDIT PROPERTY ──
